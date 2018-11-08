@@ -1,0 +1,66 @@
+﻿#RequireAdmin
+#include <MsgBoxConstants.au3>
+Opt("WinTitleMatchMode", 1)
+
+Local Const $swSource = @DesktopDir & "\VNC\tightvnc-2.8.11-gpl-setup-64bit.msi"
+;ShellExecuteWait($swSource)
+ShellExecute($swSource)
+Local $hWnd = WinWait("TightVNC Setup")
+If @error Then
+   MsgBox(0, "", "未捕获到指定窗口")
+EndIf
+WinActivate($hWnd)
+Sleep(500)
+Send("!n")
+Sleep(250)
+Send("{TAB}")
+Sleep(250)
+Send("{TAB}")
+Sleep(250)
+Send("{TAB}")
+Sleep(250)
+Send("{TAB}")
+Sleep(250)
+Send("{TAB}")
+Sleep(250)
+Send("{SPACE}")
+;ControlClick($hWnd, "", "[CLASS:Button; INSTANCE:1; ID:919]")
+Sleep(500)
+Send("!n")
+Sleep(500)
+Send("!u")
+Sleep(500)
+Send("{DOWN}")
+Sleep(250)
+Send("{DOWN}")
+Sleep(500)
+Send("{SPACE}")
+Sleep(500)
+Send("{DOWN}")
+Sleep(250)
+Send("{DOWN}")
+Sleep(250)
+Send("{DOWN}")
+Sleep(250)
+Send("{DOWN}")
+Sleep(500)
+Send("{ENTER}")
+Sleep(500)
+Send("!n")
+Sleep(500)
+Send("!n")
+Sleep(500)
+Send("!i")
+Local $hWnd = WinWait("TightVNC Server: Set Passwords")
+If @error Then
+   MsgBox(0, "", "未捕获到VNC设置窗口")
+EndIf
+ClipPut("123@abc")
+Sleep(500)
+Send("{DOWN}")
+Sleep(250)
+Send("{DOWN}")
+
+
+
+

@@ -24,13 +24,6 @@ If @error Then
    Run(@DesktopDir & "\Firefox Setup 62.0.3.exe")
 EndIf
 
-Local Const $QhbPath = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\企话宝1.1.0", "UninstallString")
-If @error Then
-   Local Const $QhbSource = $SwSource & "\qhb-release-1.1.0.exe"
-   _FileCopy($QhbSource, @DesktopDir)
-   Run(@DesktopDir & "\qhb-release-1.1.0.exe")
-EndIf
-
 If ProcessExists("chrome.exe") Then
     MsgBox(48, "清除浏览器缓存数据", "请关闭谷歌浏览器再执行此项操作")
 	Exit
@@ -59,6 +52,9 @@ Else
 	EndIf
  EndIf
 
+FileDelete(@DesktopDir & "\ChromeStandaloneSetup64.exe")
+FileDelete(@DesktopDir & "\Firefox Setup 62.0.3.exe")
+
 Shortcut()
 Func Shortcut()
     Local Const $ShortcutPath = @DesktopDir & "\佰赢催收业务平台.lnk"
@@ -82,8 +78,7 @@ Func _FileCopy($sCopySource,$sCopyTargetDir)
     $winShell.namespace($sCopyTargetDir).CopyHere($sCopySource,$FOF_RESPOND_YES)
  EndFunc
 
- FileDelete(@DesktopDir & "\qhb-release-1.1.0.exe")
- FileDelete(@DesktopDir & "\ChromeStandaloneSetup64.exe")
- FileDelete(@DesktopDir & "\Firefox Setup 62.0.3.exe")
+
+
 
 
