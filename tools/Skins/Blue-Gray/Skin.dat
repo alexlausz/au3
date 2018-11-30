@@ -1,0 +1,19 @@
+[Info]
+Title = Blue-Gray
+Author = Valuater
+
+[color]
+background=0xF7F7F8
+Button=0x4A6AC0
+mouseover=0x8EA5E4
+fontcolor= 
+; 0xFFFFFF 
+
+[settings]
+size=50
+
+[icon]
+;style=bluebox
+Isize=15
+adjustleft=15
+adjustdown=2

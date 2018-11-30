@@ -1,0 +1,10 @@
+[Info]
+Title = Sand-desert
+Author = Valuater
+
+[color]
+background=0xE5D3AD
+Button=0xA47C59
+mouseover=0xD4C398
+
+[settings]

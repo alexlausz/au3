@@ -1,0 +1,16 @@
+[Info]
+Title = Hard-Steel
+Author = Valuater
+
+[color]
+background= 0x7D500D
+Button=0xD2993F
+mouseover= 0xB4802D
+fontcolor= 0xFFFFFF 
+
+[settings]
+
+
+[icon]
+style=redbox
+

@@ -1,0 +1,19 @@
+[Info]
+Title = Red-Black
+Author = Valuater
+
+[color]
+background= 0xECEBE9
+Button=0x99908C
+mouseover= 0xF13F3F
+fontcolor= 
+; 0xFFFFFF 
+
+[settings]
+size=50
+
+[icon]
+style=cross
+Isize=18
+adjustleft=15
+adjustdown=5

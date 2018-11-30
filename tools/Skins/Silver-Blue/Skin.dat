@@ -1,0 +1,13 @@
+[Info]
+Title = Silver-Blue
+Author = Valuater
+
+[color]
+background= 0xD4D4D8
+Button=0xDBDBDF
+mouseover= 0xE4E1DD
+fontcolor= 
+; 0xFFFFFF 
+
+[settings]
+size=50

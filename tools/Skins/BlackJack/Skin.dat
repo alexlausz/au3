@@ -1,0 +1,19 @@
+[Info]
+Title = BlackJack
+Author = Valuater
+
+[color]
+background= 0xE6E0D2
+Button=""
+mouseover= 0x980202
+fontcolor= 0x14C83C
+
+
+[settings]
+size=55
+
+[icon]
+style=BlackJack
+Isize=16
+adjustleft=65
+adjustdown=8

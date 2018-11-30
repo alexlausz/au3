@@ -1,0 +1,12 @@
+[Info]
+Title = MsgPlus Live!
+Author = Azkay
+
+[color]
+background = 0xF2F7FB
+Button = 0xCEE6EE
+mouseover = 0xDBEAF3
+fontcolor = 0x000000
+
+[settings]
+size = 40

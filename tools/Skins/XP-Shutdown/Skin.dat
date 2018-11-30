@@ -1,0 +1,17 @@
+[Info]
+Title = XP-Shutdown
+Author = Valuater
+
+[color]
+background=  0x7596E8
+Button=0xF6F6F3
+mouseover=0x5A7DDE
+
+[settings]
+
+
+[icon]
+style=dblue
+Isize=16
+adjustleft=10
+adjustdown=0

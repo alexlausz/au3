@@ -1,0 +1,12 @@
+[Info]
+Title = Blue-box-V
+Author = Valuater
+
+[color]
+background=0x004E7F
+button=0x0057E9
+mouseover=0x7FA7E7
+fontcolor= 0xFFFFFF
+
+[settings]
+size=15

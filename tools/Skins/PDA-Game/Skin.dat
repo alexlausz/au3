@@ -1,0 +1,18 @@
+[Info]
+Title = PDA-Game
+Author = Valuater
+
+[color]
+background=0x464646
+Button=0x75C9FD
+mouseover=0x9A9A9A
+fontcolor= 0xFFFFFF
+
+[settings]
+size=40
+
+[icon]
+style=game
+Isize=18
+adjustleft=30
+adjustdown=12

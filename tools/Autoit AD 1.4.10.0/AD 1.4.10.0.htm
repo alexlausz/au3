@@ -1,0 +1,2358 @@
+<!--HTMHELP-->
+<html><head><style type="text/css">.funcheader{border: 1px solid black; background-color: #ffffaa; font-family: Courier New; padding: 4px; margin-bottom: 7px;}.gotoheader{float: right; color: black;}.variable{font-family: Courier New; color: #aa0000; font-weight: 800;}.macro{font-family: Courier New; color: #ff00ff; font-weight: 800;}.hex{font-family: Courier New; color: #ac00aa; font-style: italic;}.arrayindex{font-family: Courier New; color: #333333;}.optparam{opacity: 0.67;}body{font-family: Arial; background-color: #eeeeee;}a{text-decoration: none; color: blue;}a:hover{color: black;}hr{border-color: black;}h1{text-align: center;}h4{text-align: center;}</style><title>AD.au3</title></head><h1 id="header">Dokumentation zu <i>AD.au3</i></h1><h4><i>Erstellt mit HTMHelp &copy; Sebastian Walter</i></h4><h3>Funktionsliste</h3><ul><li><a href="#_AD_Open">_AD_Open</a></li>
+<li><a href="#_AD_Close">_AD_Close</a></li>
+<li><a href="#_AD_ErrorNotify">_AD_ErrorNotify</a></li>
+<li><a href="#_AD_SamAccountNameToFQDN">_AD_SamAccountNameToFQDN</a></li>
+<li><a href="#_AD_FQDNToSamAccountName">_AD_FQDNToSamAccountName</a></li>
+<li><a href="#_AD_FQDNToDisplayname">_AD_FQDNToDisplayname</a></li>
+<li><a href="#_AD_ObjectExists">_AD_ObjectExists</a></li>
+<li><a href="#_AD_GetSchemaAttributes">_AD_GetSchemaAttributes</a></li>
+<li><a href="#_AD_GetObjectAttribute">_AD_GetObjectAttribute</a></li>
+<li><a href="#_AD_IsMemberOf">_AD_IsMemberOf</a></li>
+<li><a href="#_AD_HasFullRights">_AD_HasFullRights</a></li>
+<li><a href="#_AD_HasUnlockResetRights">_AD_HasUnlockResetRights</a></li>
+<li><a href="#_AD_HasRequiredRights">_AD_HasRequiredRights</a></li>
+<li><a href="#_AD_HasGroupUpdateRights">_AD_HasGroupUpdateRights</a></li>
+<li><a href="#_AD_GetObjectClass">_AD_GetObjectClass</a></li>
+<li><a href="#_AD_GetObjectOU">_AD_GetObjectOU</a></li>
+<li><a href="#_AD_GetUserGroups">_AD_GetUserGroups</a></li>
+<li><a href="#_AD_GetUserPrimaryGroup">_AD_GetUserPrimaryGroup</a></li>
+<li><a href="#_AD_SetUserPrimaryGroup">_AD_SetUserPrimaryGroup</a></li>
+<li><a href="#_AD_RecursiveGetMemberOf">_AD_RecursiveGetMemberOf</a></li>
+<li><a href="#_AD_GetGroupMembers">_AD_GetGroupMembers</a></li>
+<li><a href="#_AD_RecursiveGetGroupMembers">_AD_RecursiveGetGroupMembers</a></li>
+<li><a href="#_AD_GetGroupMemberOf">_AD_GetGroupMemberOf</a></li>
+<li><a href="#_AD_GetObjectsInOU">_AD_GetObjectsInOU</a></li>
+<li><a href="#_AD_GetAllOUs">_AD_GetAllOUs</a></li>
+<li><a href="#_AD_ListDomainControllers">_AD_ListDomainControllers</a></li>
+<li><a href="#_AD_ListRootDSEAttributes">_AD_ListRootDSEAttributes</a></li>
+<li><a href="#_AD_ListRoleOwners">_AD_ListRoleOwners</a></li>
+<li><a href="#_AD_GetLastLoginDate">_AD_GetLastLoginDate</a></li>
+<li><a href="#_AD_IsObjectDisabled">_AD_IsObjectDisabled</a></li>
+<li><a href="#_AD_IsObjectLocked">_AD_IsObjectLocked</a></li>
+<li><a href="#_AD_IsPasswordExpired">_AD_IsPasswordExpired</a></li>
+<li><a href="#_AD_GetObjectsDisabled">_AD_GetObjectsDisabled</a></li>
+<li><a href="#_AD_GetObjectsLocked">_AD_GetObjectsLocked</a></li>
+<li><a href="#_AD_GetPasswordExpired">_AD_GetPasswordExpired</a></li>
+<li><a href="#_AD_GetPasswordDontExpire">_AD_GetPasswordDontExpire</a></li>
+<li><a href="#_AD_GetObjectProperties">_AD_GetObjectProperties</a></li>
+<li><a href="#_AD_CreateOU">_AD_CreateOU</a></li>
+<li><a href="#_AD_CreateUser">_AD_CreateUser</a></li>
+<li><a href="#_AD_SetPassword">_AD_SetPassword</a></li>
+<li><a href="#_AD_ChangePassword">_AD_ChangePassword</a></li>
+<li><a href="#_AD_CreateGroup">_AD_CreateGroup</a></li>
+<li><a href="#_AD_AddUserToGroup">_AD_AddUserToGroup</a></li>
+<li><a href="#_AD_RemoveUserFromGroup">_AD_RemoveUserFromGroup</a></li>
+<li><a href="#_AD_CreateComputer">_AD_CreateComputer</a></li>
+<li><a href="#_AD_ModifyAttribute">_AD_ModifyAttribute</a></li>
+<li><a href="#_AD_RenameObject">_AD_RenameObject</a></li>
+<li><a href="#_AD_MoveObject">_AD_MoveObject</a></li>
+<li><a href="#_AD_DeleteObject">_AD_DeleteObject</a></li>
+<li><a href="#_AD_DeleteSubtree">_AD_DeleteSubtree</a></li>
+<li><a href="#_AD_SetAccountExpire">_AD_SetAccountExpire</a></li>
+<li><a href="#_AD_DisablePasswordExpire">_AD_DisablePasswordExpire</a></li>
+<li><a href="#_AD_EnablePasswordExpire">_AD_EnablePasswordExpire</a></li>
+<li><a href="#_AD_EnablePasswordChange">_AD_EnablePasswordChange</a></li>
+<li><a href="#_AD_DisablePasswordChange">_AD_DisablePasswordChange</a></li>
+<li><a href="#_AD_UnlockObject">_AD_UnlockObject</a></li>
+<li><a href="#_AD_DisableObject">_AD_DisableObject</a></li>
+<li><a href="#_AD_EnableObject">_AD_EnableObject</a></li>
+<li><a href="#_AD_GetPasswordInfo">_AD_GetPasswordInfo</a></li>
+<li><a href="#_AD_ListExchangeServers">_AD_ListExchangeServers</a></li>
+<li><a href="#_AD_ListExchangeMailboxStores">_AD_ListExchangeMailboxStores</a></li>
+<li><a href="#_AD_GetSystemInfo">_AD_GetSystemInfo</a></li>
+<li><a href="#_AD_GetManagedBy">_AD_GetManagedBy</a></li>
+<li><a href="#_AD_GetManager">_AD_GetManager</a></li>
+<li><a href="#_AD_GetGroupAdmins">_AD_GetGroupAdmins</a></li>
+<li><a href="#_AD_GroupManagerCanModify">_AD_GroupManagerCanModify</a></li>
+<li><a href="#_AD_ListPrintQueues">_AD_ListPrintQueues</a></li>
+<li><a href="#_AD_SetGroupManagerCanModify">_AD_SetGroupManagerCanModify</a></li>
+<li><a href="#_AD_GroupAssignManager">_AD_GroupAssignManager</a></li>
+<li><a href="#_AD_GroupRemoveManager">_AD_GroupRemoveManager</a></li>
+<li><a href="#_AD_AddEmailAddress">_AD_AddEmailAddress</a></li>
+<li><a href="#_AD_JoinDomain">_AD_JoinDomain</a></li>
+<li><a href="#_AD_UnJoinDomain">_AD_UnJoinDomain</a></li>
+<li><a href="#_AD_IsAccountExpired">_AD_IsAccountExpired</a></li>
+<li><a href="#_AD_GetAccountsExpired">_AD_GetAccountsExpired</a></li>
+<li><a href="#_AD_ListSchemaVersions">_AD_ListSchemaVersions</a></li>
+<li><a href="#_AD_ObjectExistsInSchema">_AD_ObjectExistsInSchema</a></li>
+<li><a href="#_AD_FixSpecialChars">_AD_FixSpecialChars</a></li>
+<li><a href="#_AD_GetLastADSIError">_AD_GetLastADSIError</a></li>
+<li><a href="#_AD_GetADOProperties">_AD_GetADOProperties</a></li>
+<li><a href="#_AD_SetADOProperties">_AD_SetADOProperties</a></li>
+<li><a href="#_AD_VersionInfo">_AD_VersionInfo</a></li>
+</ul><a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_Open"/>
+<h3>_AD_Open</h3>
+<div class="funcheader" >_AD_Open($sUserIdParam = "", $sPasswordParam = "", $sDNSDomainParam = "", $sHostServerParam = "", $sConfigurationParam = "", $iSecurity = 0)</div>
+<b>Beschreibung:</b> Opens a connection to Active Directory.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - (No longer used)
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Creation of the COM object to the AD failed. <span class="macro">@extended</span> returns error code from ObjCreate
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - Open the connection to AD failed. <span class="macro">@extended</span> returns error code of the COM error handler.
+
+<br/>&emsp;&emsp;&emsp;&emsp;    Generated if the User doesn't have query / modify access
+
+<br/>&emsp;&emsp;&emsp;&emsp;4 - Creation of the RootDSE object failed. <span class="macro">@extended</span> returns the error code received by the COM error handler.
+
+<br/>&emsp;&emsp;&emsp;&emsp;    Generated when connection to the domain isn't successful. <span class="macro">@extended</span> returns -2147023541 (0x8007054B)
+
+<br/>&emsp;&emsp;&emsp;&emsp;5 - Creation of the DS object failed. <span class="macro">@extended</span> returns the error code received by the COM error handler
+
+<br/>&emsp;&emsp;&emsp;&emsp;6 - Parameter <span class="variable">$sHostServerParam</span> and <span class="variable">$sConfigurationParam</span> are required when <span class="variable">$sDNSDomainParam</span> is specified
+
+<br/>&emsp;&emsp;&emsp;&emsp;7 - Parameter <span class="variable">$sPasswordParam</span> is required when <span class="variable">$sUserIdParam</span> is specified
+
+<br/>&emsp;&emsp;&emsp;&emsp;8 - OpenDSObject method failed. <span class="macro">@extended</span> set to error code received from the OpenDSObject method.
+
+<br/>&emsp;&emsp;&emsp;&emsp;    On Windows XP or lower this shows that <span class="variable">$sUserIdParam</span> and/or <span class="variable">$sPasswordParam</span> are invalid
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - For Windows Vista and later: Win32 error code (decimal). To get detailed error information call function _AD_GetLastADSIError<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sUserIdParam</span> - Optional: UserId credential for authentication. This has to be a valid domain user
+
+<br/>&emsp;&emsp;<span class="variable">$sPasswordParam</span> - Optional: Password for authentication
+
+<br/>&emsp;&emsp;<span class="variable">$sDNSDomainParam</span> - Optional: Active Directory domain name if you want to connect to an alternate domain e.g. DC=microsoft,DC=com
+
+<br/>&emsp;&emsp;<span class="variable">$sHostServerParam</span> - Optional: Name of Domain Controller if you want to connect to a different domain e.g. DC-Server1.microsoft.com
+
+<br/>&emsp;&emsp;&emsp;&emsp;If you want to connect to a Global Catalog append port 3268 e.g. DC-Server1.microsoft.com:3268
+
+<br/>&emsp;&emsp;&emsp;&emsp;You can omit the servername e.g. only specify microsoft.com if you want to access the domain root
+
+<br/>&emsp;&emsp;<span class="variable">$sConfigurationParam</span> - Optional: Configuration naming context if you want to connect to a different domain e.g. CN=Configuration,DC=microsoft,DC=com
+
+<br/>&emsp;&emsp;<span class="variable">$iSecurity</span> - Optional: Specifies the security settings to be used. Can be a combination of the following:
+
+<br/>&emsp;&emsp;&emsp;&emsp;0: No security settings are used (default)
+
+<br/>&emsp;&emsp;&emsp;&emsp;1: Sets the connection property "Encrypt Password" to True to encrypt userid and password
+
+<br/>&emsp;&emsp;&emsp;&emsp;2: The channel is encrypted using Secure Sockets Layer (SSL). AD requires that the Certificate Server be installed to support SSL<br/>
+<b>Kommentare:</b> To close the connection to the Active Directory, use the _AD_Close function.
+;+
+
+<br/>&emsp;&emsp;_AD_Open will use the alternative credentials <span class="variable">$sUserIdParam</span> and <span class="variable">$sPasswordParam</span> if passed as parameters.
+
+<br/>&emsp;&emsp;<span class="variable">$sUserIdParam</span> has to be in one of the following forms (assume the samAccountName = DJ)
+
+<br/>&emsp;&emsp;* Windows Login Name   e.g. "DJ"
+
+<br/>&emsp;&emsp;* NetBIOS Login Name   e.g. "&lt;DOMAIN&gt;\DJ"
+
+<br/>&emsp;&emsp;* User Principal Name  e.g. "DJ<span class="macro">@domain</span>.com"
+
+<br/>&emsp;&emsp;All other name formats have NOT been successfully tested (see section "Link").
+;+
+
+<br/>&emsp;&emsp;Connection to an alternate domain (not the domain your computer is a member of) or if your computer is not a domain member
+
+<br/>&emsp;&emsp;requires <span class="variable">$sDNSDomainParam</span>, <span class="variable">$sHostServerParam</span> and <span class="variable">$sConfigurationParam</span> as FQDN as well as <span class="variable">$sUserIdParam</span> and <span class="variable">$sPasswordParam</span>.
+
+<br/>&emsp;&emsp;Example:
+
+<br/>&emsp;&emsp;<span class="variable">$sDNSDomainParam</span> = "DC=subdomain,DC=example,DC=com"
+
+<br/>&emsp;&emsp;<span class="variable">$sHostServerParam</span> = "servername.subdomain.example.com"
+
+<br/>&emsp;&emsp;<span class="variable">$sConfigurationParam</span> = "CN=Configuration,DC=subdomain,DC=example,DC=com"
+;+
+
+<br/>&emsp;&emsp;The COM error handler will be initialized only if there doesn't already exist another error handler.
+;+
+
+<br/>&emsp;&emsp;If you specify <span class="variable">$sUserIdParam</span> as NetBIOS Login Name or User Principal Name and the OS is Windows Vista or later then _AD_Open will try to
+
+<br/>&emsp;&emsp;verify the userid/password.
+
+<br/>&emsp;&emsp;<span class="macro">@error</span> will be set to the Win32 error code (decimal). To get detailed error information please call _AD_GetlastADSIError.
+
+<br/>&emsp;&emsp;For all other OS or if userid is specified as Windows Login Name <span class="macro">@error</span>=8.
+
+<br/>&emsp;&emsp;This is OS dependant because Windows XP doesn't return useful error information.
+
+<br/>&emsp;&emsp;For Windows Login Name all OS return success even when an error occures. This seems to be caused by secure authentification.
+;+
+
+<br/>&emsp;&emsp;<span class="variable">$iSecurity</span> = 2 activates LDAP/SSL. LDAP/SSL uses port 636 by default.
+
+<br/>&emsp;&emsp;Note that an SSL server certificate must be configured properly in order to use SSL.
+;+
+
+<br/>&emsp;&emsp;If you want to connect to a specific DC in the current domain then just provide <span class="variable">$sHostServerParam</span> and let <span class="variable">$sDNSDomainParam</span> and <span class="variable">$sConfigurationParam</span> be blank.<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_Close">_AD_Close</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_Close"/>
+<h3>_AD_Close</h3>
+<div class="funcheader" >_AD_Close()</div>
+<b>Beschreibung:</b> Closes the connection established to Active Directory by _AD_Open.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Closing the connection to the AD failed. <span class="macro">@extended</span> returns the error code received by the COM error handler<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;None<br/>
+<b>Kommentare:</b> Even if closing the connection wasn't successfull and <span class="macro">@error</span> is set all used variables have been reset.<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_Open">_AD_Open</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_ErrorNotify"/>
+<h3>_AD_ErrorNotify</h3>
+<div class="funcheader" >_AD_ErrorNotify($iDebug, $sDebugFile = "")</div>
+<b>Beschreibung:</b> Set or query the debug level.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success (for <span class="variable">$iDebug</span> = -1) - one based one-dimensional array with the following elements:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Debug level. Value from 0 to 3. Check parameter <span class="variable">$iDebug</span> for details
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Debug file. File to write the debugging info to as defined by parameter <span class="variable">$sDebugFile</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - True if the COM error handler has beend set for this UDF. False if debugging is set off or another COM error handler was already stt
+
+<br/>&emsp;&emsp;Success (for <span class="variable">$iDebug</span> = 0) - 1
+
+<br/>&emsp;&emsp;Success (for <span class="variable">$iDebug</span> =&gt; 0) - 1, sets <span class="macro">@extended</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - The COM error handler for this UDF was already active
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - A COM error handler has successfully been initialized for this UDF
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$iDebug</span> is not an integer or &lt; -1 or &gt; 4
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Installation of the custom error handler failed. <span class="macro">@extended</span> is set to the error code returned by ObjEvent
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - COM error handler already set to another function<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$iDebug</span> - Debug level. Allowed values are:
+
+<br/>&emsp;&emsp;&emsp;&emsp;-1 - Return the current settings
+
+<br/>&emsp;&emsp;&emsp;&emsp;0  - Disable debugging
+
+<br/>&emsp;&emsp;&emsp;&emsp;1  - Enable debugging. Output the debug info to the console
+
+<br/>&emsp;&emsp;&emsp;&emsp;2  - Enable Debugging. Output the debug info to a MsgBox
+
+<br/>&emsp;&emsp;&emsp;&emsp;3  - Enable Debugging. Output the debug info to a file defined by <span class="variable">$sDebugFile</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;4  - Enable Debugging. The COM errors will be handled (the script no longer crashes) without any output
+
+<br/>&emsp;&emsp;<span class="variable">$sDebugFile</span> - Optional: File to write the debugging info to if <span class="variable">$iDebug</span> = 3 (Default = <span class="macro">@ScriptDir</span> & "\AD_Debug.txt")<br/>
+<b>Autor:</b> water<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_SamAccountNameToFQDN"/>
+<h3>_AD_SamAccountNameToFQDN</h3>
+<div class="funcheader" >_AD_SamAccountNameToFQDN($sSamAccountName = @UserName)</div>
+<b>Beschreibung:</b> Returns a Fully Qualified Domain Name (FQDN) from a SamAccountName.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Fully Qualified Domain Name (FQDN)
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - No record returned from Active Directory. <span class="variable">$sSamAccountName</span> not found<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sSamAccountName</span> - Optional: Security Accounts Manager (SAM) account name (default = <span class="macro">@UserName</span>)<br/>
+<b>Kommentare:</b> A $ sign must be appended to the computer name to generate the FQDN for a sAMAccountName e.g. <span class="macro">@ComputerName</span> & "$".
+
+<br/>&emsp;&emsp;The function escapes the following special characters (# and /). Commas in CN= or OU= have to be escaped by you.
+
+<br/>&emsp;&emsp;If <span class="variable">$sSamAccountName</span> is already a FQDN then the function returns <span class="variable">$sSamAccountName</span> unchanged and without raising an error.<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_FQDNToSamAccountName">_AD_FQDNToSamAccountName</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_FQDNToSamAccountName"/>
+<h3>_AD_FQDNToSamAccountName</h3>
+<div class="funcheader" >_AD_FQDNToSamAccountName($sFQDN)</div>
+<b>Beschreibung:</b> Returns the SamAccountName of a Fully Qualified Domain Name (FQDN).<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - SamAccountName
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - No record returned from Active Directory. <span class="variable">$sFQDN</span> not found<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sFQDN</span> - Fully Qualified Domain Name (FQDN)<br/>
+<b>Kommentare:</b> You have to escape commas in <span class="variable">$sFQDN</span> with a backslash. E.g. "CN=Lastname\, Firstname,OU=..."
+
+<br/>&emsp;&emsp;All other special characters (# and /) are escaped by the function.
+
+<br/>&emsp;&emsp;If <span class="variable">$sFQDN</span> is already a SamAccountName then the function returns <span class="variable">$sFQDN</span> unchanged and without raising an error.<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_SamAccountNameToFQDN">_AD_SamAccountNameToFQDN</a>, <a href="#_AD_FQDNToDisplayname">_AD_FQDNToDisplayname</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_FQDNToDisplayname"/>
+<h3>_AD_FQDNToDisplayname</h3>
+<div class="funcheader" >_AD_FQDNToDisplayname($sFQDN)</div>
+<b>Beschreibung:</b> Returns the Display Name of a Fully Qualified Domain Name (FQDN) object.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Display Name
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - <span class="macro">@error</span> as set by function _AD_GetObjectAttribute<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sFQDN</span> - Fully Qualified Domain Name (FQDN)<br/>
+<b>Kommentare:</b> You must escape commas in <span class="variable">$sFQDN</span> with a backslash. E.g. "CN=Lastname\, Firstname,OU=..."
+
+<br/>&emsp;&emsp;All other special characters (# and /) are escaped by the function.
+
+<br/>&emsp;&emsp;The function removes all escape characters (\) from the returned value.<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_FQDNToSamAccountName">_AD_FQDNToSamAccountName</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_ObjectExists"/>
+<h3>_AD_ObjectExists</h3>
+<div class="funcheader" >_AD_ObjectExists($sObject = @UserName, $sProperty = "")</div>
+<b>Beschreibung:</b> Returns 1 if exactly one object exists for the given property in the local Active Directory Tree.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1, Exactly one object exists for the given property in the local Active Directory Tree
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - No object found for the specified property
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - More than one object found for the specified property. x is the number of objects found<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span>   - Optional: Object (user, computer, group, OU) to check (default = <span class="macro">@UserName</span>)
+
+<br/>&emsp;&emsp;<span class="variable">$sProperty</span> - Optional: Property to check. If omitted the function tries to determine whether to use sAMAccountname or FQDN<br/>
+<b>Kommentare:</b> Checking on a computer account requires a "$" (dollar) appended to the sAMAccountName.
+
+<br/>&emsp;&emsp;To check the existence of an OU use the FQDN of the OU as first parameter because an OU has no SamAccountName.<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetSchemaAttributes"/>
+<h3>_AD_GetSchemaAttributes</h3>
+<div class="funcheader" >_AD_GetSchemaAttributes($iSelect = 1)</div>
+<b>Beschreibung:</b> Enumerates attributes from the AD Schema (those replicated to the Global Catalog, indexed attributes or all).<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - One-based two dimensional array with the following information for all selected attributes:
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - ldapDisplayName of the attribute
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - True if the attribute is replicated to the Global Catalog, False or "" of not
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - True if the attribute is indexed. Indexed attributes give better performance
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - The LDAP query returned no records or another error occurred<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$iSelect</span> - Optional: Specifies the attributes to be returned:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Return all attributes (default)
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Return all attributes that are replicated to the Global Catalog
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - Return all attributes that are indexed<br/>
+<b>Autor:</b> water<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetObjectAttribute"/>
+<h3>_AD_GetObjectAttribute</h3>
+<div class="funcheader" >_AD_GetObjectAttribute($sObject, $sAttribute)</div>
+<b>Beschreibung:</b> Returns the specified attribute for the named object.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Value for the given attribute
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sObject</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - <span class="variable">$sAttribute</span> does not exist for <span class="variable">$sObject</span>. <span class="macro">@Extended</span> is set to the error returned by LDAP<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - sAMAccountName or FQDN of the object the attribute should be retrieved from
+
+<br/>&emsp;&emsp;<span class="variable">$sAttribute</span> - Attribute to be retrieved<br/>
+<b>Kommentare:</b> If the attribute is a single-value the function returns a string otherwise it returns an array.
+
+<br/>&emsp;&emsp;To get decrypted attributes (GUID, SID, dates etc.) please see _AD_GetObjectProperties.<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_ModifyAttribute">_AD_ModifyAttribute</a>, <a href="#_AD_GetObjectProperties">_AD_GetObjectProperties</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_IsMemberOf"/>
+<h3>_AD_IsMemberOf</h3>
+<div class="funcheader" >_AD_IsMemberOf($sGroup, $sObject = @UserName, $bIncludePrimaryGroup = False, $bRecursive = False, $iDepth = 10)</div>
+<b>Beschreibung:</b> Returns 1 if the object (user, group, computer) is a member of the specified group or any contained group.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1, Specified object (user, group, computer) is a member of the specified group
+
+<br/>&emsp;&emsp;Failure - 0, <span class="macro">@error</span> set
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - <span class="variable">$sObject</span> is not a member of <span class="variable">$sGroup</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sGroup</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - <span class="variable">$sObject</span> does not exist<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sGroup</span> - Group to be checked for membership. Can be specified as sAMAccountName or Fully Qualified Domain Name (FQDN)
+
+<br/>&emsp;&emsp;<span class="variable">$sObject</span> - Optional: Object type (user, group, computer) to check for membership of <span class="variable">$sGroup</span>. Can be specified as sAMAccountName or Fully Qualified Domain Name (FQDN) (default = <span class="macro">@UserName</span>)
+
+<br/>&emsp;&emsp;<span class="variable">$bIncludePrimaryGroup</span> - Optional: Additionally checks the primary group for object membership (default = False)
+
+<br/>&emsp;&emsp;<span class="variable">$bRecursive</span> - Optional: Recursively check all groups of <span class="variable">$sGroup</span> up to the depth defined by <span class="variable">$iDepth</span> (default = False)
+
+<br/>&emsp;&emsp;<span class="variable">$iDepth</span> - Optional: Maximum depth of recursion (default = 10)<br/>
+<b>Kommentare:</b> Determines if the object is an immediate member of the group. This function does not verify membership in any nested groups.<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_GetUserGroups">_AD_GetUserGroups</a>, <a href="#_AD_GetUserPrimaryGroup">_AD_GetUserPrimaryGroup</a>, <a href="#_AD_RecursiveGetMemberOf">_AD_RecursiveGetMemberOf</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_HasFullRights"/>
+<h3>_AD_HasFullRights</h3>
+<div class="funcheader" >_AD_HasFullRights($sObject, $sUser = @UserName)</div>
+<b>Beschreibung:</b> Returns 1 if the given user has full rights over the given group or user.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1, Specified user has full rights over the given group or user
+
+<br/>&emsp;&emsp;Failure - 0, <span class="macro">@error</span> set
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - <span class="variable">$sUser</span> does not have full rights over <span class="variable">$sObject</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sUser</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - <span class="variable">$sObject</span> does not exist<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - Group or User to be checked. Can be specified as Fully Qualified Domain Name (FQDN) or sAMAccountName
+
+<br/>&emsp;&emsp;<span class="variable">$sUser</span> - Optional: User to be checked. Can be specified as Fully Qualified Domain Name (FQDN) or SamAccountName (default = <span class="macro">@UserName</span>)<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_HasUnlockResetRights">_AD_HasUnlockResetRights</a>, <a href="#_AD_HasRequiredRights">_AD_HasRequiredRights</a>, <a href="#_AD_HasGroupUpdateRights">_AD_HasGroupUpdateRights</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_HasUnlockResetRights"/>
+<h3>_AD_HasUnlockResetRights</h3>
+<div class="funcheader" >_AD_HasUnlockResetRights($sObject, $sUser = @UserName)</div>
+<b>Beschreibung:</b> Returns 1 if the given user has unlock and password reset rights on the object.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1, Specified user has unlock and password reset rights over the given group or user
+
+<br/>&emsp;&emsp;Failure - 0, <span class="macro">@error</span> set
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - <span class="variable">$sUser</span> does not have unlock and password reset rights over <span class="variable">$sObject</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sUser</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - <span class="variable">$sObject</span> does not exist<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - Group or User to be checked. Can be specified as Fully Qualified Domain Name (FQDN) or sAMAccountName
+
+<br/>&emsp;&emsp;<span class="variable">$sUser</span> - Optional: User to be checked. Can be specified as Fully Qualified Domain Name (FQDN) or SamAccountName (default = <span class="macro">@UserName</span>)<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_HasFullRights">_AD_HasFullRights</a>, <a href="#_AD_HasRequiredRights">_AD_HasRequiredRights</a>, <a href="#_AD_HasGroupUpdateRights">_AD_HasGroupUpdateRights</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_HasRequiredRights"/>
+<h3>_AD_HasRequiredRights</h3>
+<div class="funcheader" >_AD_HasRequiredRights($sObject, $iRight = $ADS_FULL_RIGHTS, $sUser = @UserName)</div>
+<b>Beschreibung:</b> Returns 1 if the given user has the required rights on the object.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1, Specified user has the required rights over the given group or user
+
+<br/>&emsp;&emsp;Failure - 0, <span class="macro">@error</span> set
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - <span class="variable">$sUser</span> does not have the required rights over <span class="variable">$sObject</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sUser</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - <span class="variable">$sObject</span> does not exist<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - Group or User to be checked. Can be specified as Fully Qualified Domain Name (FQDN) or sAMAccountName
+
+<br/>&emsp;&emsp;<span class="variable">$sRight</span> - Optional: Access mask constant to be checked (default = <span class="variable">$ADS_FULL_RIGHTS</span> (Full rights)).
+
+<br/>&emsp;&emsp;&emsp;&emsp;Full rights is the combination of the following rights:
+
+<br/>&emsp;&emsp;&emsp;&emsp;ADS_RIGHT_DELETE                   = <span class="hex">0x10000</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;ADS_RIGHT_READ_CONTROL             = <span class="hex">0x20000</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;ADS_RIGHT_WRITE_DAC                = <span class="hex">0x40000</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;ADS_RIGHT_WRITE_OWNER              = <span class="hex">0x80000</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;ADS_RIGHT_DS_CREATE_CHILD          = <span class="hex">0x1</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;ADS_RIGHT_DS_DELETE_CHILD          = <span class="hex">0x2</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;ADS_RIGHT_ACTRL_DS_LIST            = <span class="hex">0x4</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;ADS_RIGHT_DS_SELF                  = <span class="hex">0x8</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;ADS_RIGHT_DS_READ_PROP             = <span class="hex">0x10</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;ADS_RIGHT_DS_WRITE_PROP            = <span class="hex">0x20</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;ADS_RIGHT_DS_DELETE_TREE           = <span class="hex">0x40</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;ADS_RIGHT_DS_LIST_OBJECT           = <span class="hex">0x80</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;ADS_RIGHT_DS_CONTROL_ACCESS        = <span class="hex">0x100</span>
+
+<br/>&emsp;&emsp;<span class="variable">$sUser</span> - Optional: User to be checked. Can be specified as Fully Qualified Domain Name (FQDN) or SamAccountName (default = <span class="macro">@UserName</span>)<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_HasFullRights">_AD_HasFullRights</a>, <a href="#_AD_HasUnlockResetRights">_AD_HasUnlockResetRights</a>, <a href="#_AD_HasGroupUpdateRights">_AD_HasGroupUpdateRights</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_HasGroupUpdateRights"/>
+<h3>_AD_HasGroupUpdateRights</h3>
+<div class="funcheader" >_AD_HasGroupUpdateRights($sObject, $sUser = @UserName)</div>
+<b>Beschreibung:</b> Returns 1 if the given user has rights to update the group membership of the object.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1, Specified user has the rights to update the group membership on the given group
+
+<br/>&emsp;&emsp;Failure - 0, <span class="macro">@error</span> set
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - <span class="variable">$sUser</span> does not have the rights to update the group membership on <span class="variable">$sObject</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sUser</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - <span class="variable">$sObject</span> does not exist<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - Group to be checked. Can be specified as Fully Qualified Domain Name (FQDN) or sAMAccountName
+
+<br/>&emsp;&emsp;<span class="variable">$sUser</span> - Optional: User to be checked. Can be specified as Fully Qualified Domain Name (FQDN) or SamAccountName (default = <span class="macro">@UserName</span>)<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_HasFullRights">_AD_HasFullRights</a>, <a href="#_AD_HasUnlockResetRights">_AD_HasUnlockResetRights</a>, <a href="#_AD_HasRequiredRights">_AD_HasRequiredRights</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetObjectClass"/>
+<h3>_AD_GetObjectClass</h3>
+<div class="funcheader" >_AD_GetObjectClass($sObject, $bAll = False)</div>
+<b>Beschreibung:</b> Returns the main class (also called structural class) of an object ("user", "group" etc.).<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Main class of the specified object if <span class="variable">$bAll</span> = False or an zero-based array of the main plus the superior classes if <span class="variable">$bAll</span> = True
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Specified object does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - The LDAP query returned no record. <span class="macro">@extended</span> is set to the error returned by LDAP<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - Object for which the main class should be returned. Can be specified as Fully Qualified Domain Name (FQDN) or sAMAccountName
+
+<br/>&emsp;&emsp;<span class="variable">$bAll</span>    - Optional: Returns the main class plus the superior classes from which the main class is deduced hierarchically (default = False)<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetObjectOU"/>
+<h3>_AD_GetObjectOU</h3>
+<div class="funcheader" >_AD_GetObjectOU($sObject, $sReturn = "distinguishedName")</div>
+<b>Beschreibung:</b> Returns the OU (Organizational Unit) of an object ("user", "group" etc.).<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - FQDN of the object's OU.
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Specified object does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - The LDAP query returned no record. <span class="macro">@extended</span> is set to the error returned by LDAP
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - Parameter <span class="variable">$sReturn</span> is wrong. Must be "distinguishedName" or "Name"<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - Object for which the main class should be returned. Can be specified as Fully Qualified Domain Name (FQDN), sAMAccountName or ADsPath
+
+<br/>&emsp;&emsp;<span class="variable">$sReturn</span> - Optional: Property to return. Must be "distinguishedName" or "Name" (default = "distinguishedName")<br/>
+<b>Autor:</b> water<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetUserGroups"/>
+<h3>_AD_GetUserGroups</h3>
+<div class="funcheader" >_AD_GetUserGroups($sUser = @UserName, $bIncludePrimaryGroup = False)</div>
+<b>Beschreibung:</b> Returns an array of group names that the user is immediately a member of.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Returns an one-based one dimensional array of group names (FQDN) the user is a member of
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Specified user does not exist<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sUser</span>                - Optional: User for which the group membership is to be returned (default = <span class="macro">@Username</span>). Can be specified as Fully Qualified Domain Name (FQDN) or sAMAccountName
+
+<br/>&emsp;&emsp;<span class="variable">$bIncludePrimaryGroup</span> - Optional: include the primary group to the returned list (default = False)<br/>
+<b>Kommentare:</b> Works for computers or groups as well.<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_IsMemberOf">_AD_IsMemberOf</a>, <a href="#_AD_GetUserPrimaryGroup">_AD_GetUserPrimaryGroup</a>, <a href="#_AD_RecursiveGetMemberOf">_AD_RecursiveGetMemberOf</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetUserPrimaryGroup"/>
+<h3>_AD_GetUserPrimaryGroup</h3>
+<div class="funcheader" >_AD_GetUserPrimaryGroup($sUser = @UserName)</div>
+<b>Beschreibung:</b> Returns the primary group the user is assigned to.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Primary group (FQDN) the user is assigned to.
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Specified user does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - A primary group couldn't be found for the specified user<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sUser</span> - Optional: User for which the primary group is to be returned (default = <span class="macro">@Username</span>). Can be specified as Fully Qualified Domain Name (FQDN) or sAMAccountName<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_IsMemberOf">_AD_IsMemberOf</a>, <a href="#_AD_GetUserGroups">_AD_GetUserGroups</a>, <a href="#_AD_RecursiveGetMemberOf">_AD_RecursiveGetMemberOf</a>, <a href="#_AD_SetUserPrimaryGroup">_AD_SetUserPrimaryGroup</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_SetUserPrimaryGroup"/>
+<h3>_AD_SetUserPrimaryGroup</h3>
+<div class="funcheader" >_AD_SetUserPrimaryGroup($sUser, $sGroup)</div>
+<b>Beschreibung:</b> Sets the users primary group.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sUser</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - <span class="variable">$sGroup</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - <span class="variable">$sUser</span> must be a member of <span class="variable">$sGroup</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by SetInfo method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sUser</span> - User for which the primary group is to be set. Can be specified as Fully Qualified Domain Name (FQDN) or sAMAccountName
+
+<br/>&emsp;&emsp;<span class="variable">$sGroup</span> - Group to be set as the primary group for the specified user. Can be specified as Fully Qualified Domain Name (FQDN) or sAMAccountName<br/>
+<b>Autor:</b> Talder<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_AddUserToGroup">_AD_AddUserToGroup</a>, <a href="#_AD_GetUserPrimaryGroup">_AD_GetUserPrimaryGroup</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_RecursiveGetMemberOf"/>
+<h3>_AD_RecursiveGetMemberOf</h3>
+<div class="funcheader" >_AD_RecursiveGetMemberOf($sObject, $iDepth = 10, $bListInherited = True, $bFQDN = True)</div>
+<b>Beschreibung:</b> Takes a group, user or computer and recursively returns a list of groups the object is a member of.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Returns an one-based one dimensional array of group names (FQDN or sAMAccountName) the user or group is a member of
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Specified user, group or computer does not exist<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - User, group or computer for which the group membership is to be returned. Can be specified as Fully Qualified Domain Name (FQDN) or sAMAccountName
+
+<br/>&emsp;&emsp;<span class="variable">$iDepth</span> - Optional: Maximum depth of recursion (default = 10)
+
+<br/>&emsp;&emsp;<span class="variable">$bListInherited</span> - Optional: Defines if the function returns the group(s) it was inherited from (default = True)
+
+<br/>&emsp;&emsp;<span class="variable">$bFQDN</span> - Optional: Specifies the attribute to be returned. True = distinguishedName (FQDN), False = SamAccountName (default = True)<br/>
+<b>Kommentare:</b> This function traverses the groups that the object is immediately a member of while also checking its group membership.
+
+<br/>&emsp;&emsp;For groups that are inherited, the return is the FQDN or sAMAccountname of the group, user or computer, and the FQDN(s) or sAMAccountname(s) of the group(s) it
+
+<br/>&emsp;&emsp;was inherited from, seperated by '|'(s) if flag <span class="variable">$bListInherited</span> is set to True.
+;+
+
+<br/>&emsp;&emsp;If flag <span class="variable">$bListInherited</span> is set to False then the group names are sorted and only unique groups are returned.<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_IsMemberOf">_AD_IsMemberOf</a>, <a href="#_AD_GetUserGroups">_AD_GetUserGroups</a>, <a href="#_AD_GetUserPrimaryGroup">_AD_GetUserPrimaryGroup</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetGroupMembers"/>
+<h3>_AD_GetGroupMembers</h3>
+<div class="funcheader" >_AD_GetGroupMembers($sGroup)</div>
+<b>Beschreibung:</b> Returns an array of group members.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Returns an one-based one dimensional array of names (FQDN) that are members of the specified group
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Specified group does not exist<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sGroup</span> - Group to retrieve members from. Can be specified as Fully Qualified Domain Name (FQDN) or sAMAccountName<br/>
+<b>Kommentare:</b> If the group has no members, _AD_GetGroupMembers returns an array with one element (row count) set to 0<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_GetGroupMemberOf">_AD_GetGroupMemberOf</a>, <a href="#_AD_RecursiveGetGroupMembers">_AD_RecursiveGetGroupMembers</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_RecursiveGetGroupMembers"/>
+<h3>_AD_RecursiveGetGroupMembers</h3>
+<div class="funcheader" >_AD_RecursiveGetGroupMembers($sGroup, $iDepth = 10, $bListInherited = True, $bFQDN = True)</div>
+<b>Beschreibung:</b> Takes a group and recursively returns a list of groups and members of the group.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Returns an one-based one dimensional array of group or member names (FQDN or sAMAccountName)
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Specified group does not exist<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sGroup</span>         - Group for which the members should to be returned. Can be specified as Fully Qualified Domain Name (FQDN) or sAMAccountName
+
+<br/>&emsp;&emsp;<span class="variable">$iDepth</span>         - Optional: Maximum depth of recursion (default = 10)
+
+<br/>&emsp;&emsp;<span class="variable">$bListInherited</span> - Optional: Defines if the function returns the group it is a member of (default = True)
+
+<br/>&emsp;&emsp;<span class="variable">$bFQDN</span>          - Optional: Specifies the attribute to be returned. True = distinguishedName (FQDN), False = SamAccountName (default = True)<br/>
+<b>Kommentare:</b> This function traverses the groups in the specified group until the maximum depth is reached.
+
+<br/>&emsp;&emsp;if <span class="variable">$bListInherited</span> = True the return is the FQDN or sAMAccountname of the group or member and the FQDN(s) or sAMAccountname(s) of the group it
+
+<br/>&emsp;&emsp;is a member of, seperated by '|'(s) if flag <span class="variable">$bListInherited</span> is set to True.
+;+
+
+<br/>&emsp;&emsp;If flag <span class="variable">$bListInherited</span> is set to False then the group/member names are sorted and only unique entries are returned.<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_GetGroupMembers">_AD_GetGroupMembers</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetGroupMemberOf"/>
+<h3>_AD_GetGroupMemberOf</h3>
+<div class="funcheader" >_AD_GetGroupMemberOf($sGroup)</div>
+<b>Beschreibung:</b> Returns an array of group membership.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Returns an one-based one dimensional array of group names (FQDN) that the specified group is a member of
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Specified group does not exist<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sGroup</span> - Group for which membership in other groups is to be retrieved. Can be specified as Fully Qualified Domain Name (FQDN) or sAMAccountName<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_GetGroupMembers">_AD_GetGroupMembers</a>, <a href="#_AD_RecursiveGetGroupMembers">_AD_RecursiveGetGroupMembers</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetObjectsInOU"/>
+<h3>_AD_GetObjectsInOU</h3>
+<div class="funcheader" >_AD_GetObjectsInOU($sOU = "", $sFilter = "(name=*)", $iSearchScope = 2, $sDataToRetrieve = "sAMAccountName", $sSortBy = "sAMAccountName", $bCount = False, $vReturnNull = True)</div>
+<b>Beschreibung:</b> Returns a filtered array of objects and attributes for a given OU or just the number of records if <span class="variable">$bCount</span> is True.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Number of records retrieved or a one or two dimensional one-based array of objects and attributes in the given OU. First entry is for the given OU itself
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Specified OU does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - No records returned from Active Directory. <span class="variable">$sDataToRetrieve</span> is invalid (attribute may not exist). <span class="macro">@extended</span> is set to the error returned by LDAP
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - No records returned from Active Directory. <span class="variable">$sFilter</span> didn't return a record<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sOU</span> - The OU to retrieve from (FQDN) (default = "", equals "search the whole AD tree")
+
+<br/>&emsp;&emsp;<span class="variable">$sFilter</span> - Optional: An additional LDAP filter if required (default = "(name=*)")
+
+<br/>&emsp;&emsp;<span class="variable">$iSearchScope</span> - Optional: 0 = base, 1 = one-level, 2 = sub-tree (default)
+
+<br/>&emsp;&emsp;<span class="variable">$sDataToRetrieve</span> - Optional: A comma-seperated list of attributes to retrieve (default = "sAMAccountName").
+
+<br/>&emsp;&emsp;&emsp;&emsp;More than one attribute will create a 2-dimensional array
+
+<br/>&emsp;&emsp;<span class="variable">$sSortBy</span> - Optional: name of the attribute the resulting array will be sorted upon (default = "sAMAccountName").
+
+<br/>&emsp;&emsp;&emsp;&emsp;To completely suppress sorting (even the default sort) set this parameter to "". This improves performance when doing large queries
+
+<br/>&emsp;&emsp;<span class="variable">$bCount</span> - Optional: If set to True only returns the number of records returned by the query (default = False)
+
+<br/>&emsp;&emsp;<span class="variable">$vReturnNull</span> - Optional: If set to any other value but True Null values (occur when the property has never been set) are returned as this value (default = True)<br/>
+<b>Kommentare:</b> Multi-value attributes are returned as string with the pipe character (|) as separator.
+;+
+
+<br/>&emsp;&emsp;The default filter returns an array including one record for the OU itself. To exclude the OU use a different filter that doesn't include the OU
+
+<br/>&emsp;&emsp;e.g. "(&(objectcategory=person)(objectclass=user)(name=*))"
+;+
+
+<br/>&emsp;&emsp;To make sure that all properties you specify in <span class="variable">$sDataToRetrieve</span> exist in the AD you can use _AD_ObjectExistsInSchema.
+;+
+
+<br/>&emsp;&emsp;The following examples illustrate the use of the escaping mechanism in the LDAP filter:
+
+<br/>&emsp;&emsp;(o=Parens R Us \28for all your parenthetical needs\29)
+
+<br/>&emsp;&emsp;(cn=*\2A*)
+
+<br/>&emsp;&emsp;(filename=C:\5cMyFile)
+
+<br/>&emsp;&emsp;(bin=\00\00\00\04)
+
+<br/>&emsp;&emsp;(sn=Lu\c4\8di\c4\87)
+
+<br/>&emsp;&emsp;The first example shows the use of the escaping mechanism to represent parenthesis characters.
+
+<br/>&emsp;&emsp;The second shows how to represent a "*" in a value, preventing it from being interpreted as a substring indicator.
+
+<br/>&emsp;&emsp;The third illustrates the escaping of the backslash character.
+
+<br/>&emsp;&emsp;The fourth example shows a filter searching for the four-byte value 0x00000004, illustrating the use of the escaping mechanism to
+
+<br/>&emsp;&emsp;represent arbitrary data, including NUL characters.
+
+<br/>&emsp;&emsp;The final example illustrates the use of the escaping mechanism to represent various non-ASCII UTF-8 characters.<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_GetAllOUs">_AD_GetAllOUs</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetAllOUs"/>
+<h3>_AD_GetAllOUs</h3>
+<div class="funcheader" >_AD_GetAllOUs($sRoot = "", $sSeparator = "\", $iSelect = 0, $iSearchScope = 2)</div>
+<b>Beschreibung:</b> Retrieves an array of OUs. The paths are separated by the '\' character.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - One-based two dimensional array of OUs starting with the given OU. The paths are separated by "\"
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - ... \name of grandfather OU\name of father OU\name of son OU
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Distinguished Name (FQDN) of the son OU
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - No OUs found
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Specified <span class="variable">$sRoot</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - <span class="variable">$iSelect</span> is not an integer or &lt; 0 or &gt; 2<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sRoot</span>      - Optional: OU (FQDN) where to start in the AD tree (default = "", equals "start at the AD root")
+
+<br/>&emsp;&emsp;<span class="variable">$sSeparator</span> - Optional: Single character to separate the OU names (default = "\")
+
+<br/>&emsp;&emsp;<span class="variable">$iSelect</span>    - Optional: Which objects should be returned in the result (default = 0)
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - Return OUs (Organizational Units) (default)
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Return CNs (Containers)
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Return OUs + CNs
+
+<br/>&emsp;&emsp;<span class="variable">$iSearchScope</span> - Optional: 0 = base, 1 = one-level, 2 = sub-tree (default)<br/>
+<b>Kommentare:</b> If an OU contains spaces the sorting is wrong and might lead to problems in further processing.
+
+<br/>&emsp;&emsp;Please have a look at <a target="_blank" href="http://www.autoitscript.com/forum/topic/106163-active-directory-udf/page__view__findpost__p__943892">www.autoitscript.com/forum/topic/106163-active-directory-udf/page__view__findpost__p__943892</a><br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_GetObjectsInOU">_AD_GetObjectsInOU</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_ListDomainControllers"/>
+<h3>_AD_ListDomainControllers</h3>
+<div class="funcheader" >_AD_ListDomainControllers($bListRO = False, $bListGC = False)</div>
+<b>Beschreibung:</b> Enumerates all Domain Controllers (returns information about: Domain Controller, site, subnet and Global Catalog).<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - One-based two dimensional array with the following information:
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - Domain Controller: Name
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Domain Controller: Distinguished Name (FQDN)
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Domain Controller: DNS host name
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - Site: Name
+
+<br/>&emsp;&emsp;&emsp;&emsp;4 - Site: Distinguished Name (FQDN)
+
+<br/>&emsp;&emsp;&emsp;&emsp;5 - Site: List of subnets that can connect to the site using this DC in the format x.x.x.x/mask - multiple subnets are separated by comma
+
+<br/>&emsp;&emsp;&emsp;&emsp;6 - Global Catalog: Set to True if the DC is a Global Catalog (only if flag <span class="variable">$bListGC</span> = True. If False then "" is returned)
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - No Domain Controllers found. <span class="macro">@extended</span> is set to the error returned by LDAP<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$bListRO</span> - Optional: If set to True only returns RODC (read only domain controllers) (default = False)
+
+<br/>&emsp;&emsp;<span class="variable">$bListGC</span> - Optional: If set to True queries the DC for a Global Catalog. Disabled for performance reasons (default = False)<br/>
+<b>Kommentare:</b> This function only lists writeable DCs (default). To list RODC (read only DCs) use parameter <span class="variable">$bListRO</span><br/>
+<b>Autor:</b> water (based on VB functions by Richard L. Mueller)<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_ListRootDSEAttributes"/>
+<h3>_AD_ListRootDSEAttributes</h3>
+<div class="funcheader" >_AD_ListRootDSEAttributes()</div>
+<b>Beschreibung:</b> Returns a one-based array of the RootDSE Atributes.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Returns an one-based one dimensional array of the following RootDSE attributes. Multi-valued attributes are as multiple lines.
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - configurationNamingContext: Specifies the distinguished name for the configuration container.
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - currentTime: Specifies the current time set on this directory server in Coordinated Universal Time format.
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - defaultNamingContext: Specifies the distinguished name of the domain that this directory server is a member.
+
+<br/>&emsp;&emsp;&emsp;&emsp;4 - dnsHostName: Specifies the DNS address for this directory server.
+
+<br/>&emsp;&emsp;&emsp;&emsp;5 - domainControllerFunctionality: Specifies the functional level of this domain controller. Values can be:
+
+<br/>&emsp;&emsp;0 - Windows 2000 Mode
+
+<br/>&emsp;&emsp;2 - Windows Server 2003 Mode
+
+<br/>&emsp;&emsp;3 - Windows Server 2008 Mode
+
+<br/>&emsp;&emsp;4 - Windows Server 2008 R2 Mode
+
+<br/>&emsp;&emsp;5 - Windows Server 2012 Mode
+
+<br/>&emsp;&emsp;6 - Windows Server 2012 R2 Mode
+
+<br/>&emsp;&emsp;7 - Windows Server 2016 Mode
+
+<br/>&emsp;&emsp;&emsp;&emsp;6 - domainFunctionality: Specifies the functional level of the domain. Values can be:
+
+<br/>&emsp;&emsp;0 - Windows 2000 Domain Mode
+
+<br/>&emsp;&emsp;1 - Windows Server 2003 Interim Domain Mode
+
+<br/>&emsp;&emsp;2 - Windows Server 2003 Domain Mode
+
+<br/>&emsp;&emsp;3 - Windows Server 2008 Domain Mode
+
+<br/>&emsp;&emsp;4 - Windows Server 2008 R2 Domain Mode
+
+<br/>&emsp;&emsp;5 - Windows Server 2012 Domain Mode
+
+<br/>&emsp;&emsp;6 - Windows Server 2012 R2 Domain Mode
+
+<br/>&emsp;&emsp;7 - Windows Server 2016 Domain Mode
+
+<br/>&emsp;&emsp;&emsp;&emsp;7 - dsServiceName: Specifies the distinguished name of the NTDS settings object for this directory server.
+
+<br/>&emsp;&emsp;&emsp;&emsp;8 - forestFunctionality: Specifies the functional level of the forest. Values can be:
+
+<br/>&emsp;&emsp;0 - Windows 2000 Forest Mode
+
+<br/>&emsp;&emsp;1 - Windows Server 2003 Interim Forest Mode
+
+<br/>&emsp;&emsp;2 - Windows Server 2003 Forest Mode
+
+<br/>&emsp;&emsp;3 - Windows Server 2008 Forest Mode
+
+<br/>&emsp;&emsp;4 - Windows Server 2008 R2 Forest Mode
+
+<br/>&emsp;&emsp;5 - Windows Server 2012 Forest Mode
+
+<br/>&emsp;&emsp;6 - Windows Server 2012 R2 Forest Mode
+
+<br/>&emsp;&emsp;7 - Windows Server 2016 Forest Mode
+
+<br/>&emsp;&emsp;&emsp;&emsp;9 - highestCommittedUSN: Specifies the highest update sequence number (USN) on this directory server. Used by directory replication.
+
+<br/>&emsp;&emsp;&emsp;&emsp;10 - isGlobalCatalogReady: Specifies Global Catalog operational status. Values can be either True or False.
+
+<br/>&emsp;&emsp;&emsp;&emsp;11 - isSynchronized: Specifies directory server synchronisation status. Values can be either True or False.
+
+<br/>&emsp;&emsp;&emsp;&emsp;12 - LDAPServiceName: Specifies the Service Principal Name (SPN) for the LDAP server. Used for mutual authentication.
+
+<br/>&emsp;&emsp;&emsp;&emsp;13 - namingContexts: A multi-valued attribute that specifies the distinguished names for all naming contexts stored on this directory server.
+
+<br/>&emsp;&emsp;+By default, a Windows 2000 domain controller has at least three naming contexts: Schema, Configuration, and the domain which the server is a member of.
+
+<br/>&emsp;&emsp;&emsp;&emsp;14 - rootDomainNamingContext: Specifies the distinguished name for the first domain in the forest that this directory server is a member of.
+
+<br/>&emsp;&emsp;&emsp;&emsp;15 - schemaNamingContext: Specifies the distinguished name for the schema container.
+
+<br/>&emsp;&emsp;&emsp;&emsp;16 - serverName: Specifies the distinguished name of the server object for this directory server in the configuration container.
+
+<br/>&emsp;&emsp;&emsp;&emsp;17 - subschemaSubentry: Specifies the distinguished name for the subSchema object. The subSchema object specifies properties that expose the supported attributes
+
+<br/>&emsp;&emsp;+(in the attributeTypes property) and classes (in the objectClasses property).
+
+<br/>&emsp;&emsp;&emsp;&emsp;18 - supportedCapabilities: multi-valued attribute that specifies the capabilities supported by this directory server.
+
+<br/>&emsp;&emsp;&emsp;&emsp;19 - supportedControl: A multi-valued attribute that specifies the extension control OIDs supported by this directory server.
+
+<br/>&emsp;&emsp;&emsp;&emsp;20 - supportedLDAPPolicies: A multi-valued attribute that specifies the names of the supported LDAP management policies.
+
+<br/>&emsp;&emsp;&emsp;&emsp;21 - supportedLDAPVersion: A multi-valued attribute that specifies the LDAP versions (specified by major version number) supported by this directory server.
+
+<br/>&emsp;&emsp;&emsp;&emsp;22 - supportedSASLMechanisms: Specifies the security mechanisms supported for SASL negotiation (see LDAP RFCs). By default, GSSAPI is supported.<br/>
+<b>Kommentare:</b> In LDAP 3.0, rootDSE is defined as the root of the directory data tree on a directory server.
+
+<br/>&emsp;&emsp;The rootDSE is not part of any namespace. The purpose of the rootDSE is to provide data about the directory server.<br/>
+<b>Autor:</b> water<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_ListRoleOwners"/>
+<h3>_AD_ListRoleOwners</h3>
+<div class="funcheader" >_AD_ListRoleOwners()</div>
+<b>Beschreibung:</b> Returns a one-based array of FSMO (Flexible Single Master Operation) Role Owners.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Returns an one-based one dimensional array of FSMO Role Owners. The array contains:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Domain PDC FSMO
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Domain Rid FSMO
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - Domain Infrastructure FSMO
+
+<br/>&emsp;&emsp;&emsp;&emsp;4 - Forest-wide Schema FSMO
+
+<br/>&emsp;&emsp;&emsp;&emsp;5 - Forest-wide Domain naming FSMO<br/>
+<b>Autor:</b> water<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetLastLoginDate"/>
+<h3>_AD_GetLastLoginDate</h3>
+<div class="funcheader" >_AD_GetLastLoginDate($sObject = @UserName, $sSite = "", $aDCList = "")</div>
+<b>Beschreibung:</b> Returns the lastlogin information for user and computer accounts from all DCs using the SamAccountName.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Last login date returned as YYYYMMDDHHMMSS. <span class="macro">@extended</span> is set to the total number of Domain Controllers.
+
+<br/>&emsp;&emsp;+<span class="macro">@error</span> could be &gt; 0 and contains the number of DCs that could not be reached or returns no data
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sObject</span> could not be found. <span class="macro">@extended</span> = 0
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - <span class="variable">$sObject</span> has never logged in to the domain. <span class="macro">@extended</span> = 0
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - <span class="variable">$aDCList</span> has to be an array or blank
+
+<br/>&emsp;&emsp;&emsp;&emsp;4 - <span class="variable">$aDCList</span> has to be a 2-dimensional array
+
+<br/>&emsp;&emsp;Warning - Last login date returned as YYYYMMDDHHMMSS (see Success), sets <span class="macro">@error</span> and <span class="macro">@extended</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Number of DCs which could not be reached. Result is returned from all available DCs. <span class="macro">@extended</span> is set to the total number of Domain Controllers<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - Optional: SamAccountName of a user or computer account to get the last login date (default = <span class="macro">@Username</span>).
+
+<br/>&emsp;&emsp;<span class="variable">$sSite</span>   - Optional: Only query DCs that belong to this site(s) (default = all sites).
+
+<br/>&emsp;&emsp;+This can be a single site or a list of sites separated by commas
+
+<br/>&emsp;&emsp;<span class="variable">$aDCList</span> - Optional: one-based two dimensional array of Domain Controllers as returned by function _AD_ListDomainControllers (default = "")<br/>
+<b>Kommentare:</b> If it takes (too) long to get a result either some DCs are down or you have too many DCs in your AD.
+
+<br/>&emsp;&emsp;+Case one: Please check <span class="macro">@error</span> and <span class="macro">@extended</span> as described above
+
+<br/>&emsp;&emsp;+Case two: Specify parameter <span class="variable">$sSite</span> to reduce the number of DCs to query and/or retrieve the list of DCs yourself and pass the array as parameter 3<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water, Stephane<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_IsObjectDisabled"/>
+<h3>_AD_IsObjectDisabled</h3>
+<div class="funcheader" >_AD_IsObjectDisabled($sObject = @UserName)</div>
+<b>Beschreibung:</b> Returns 1 if the object (user account, computer account) is disabled.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1, Specified object is disabled
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - <span class="variable">$sObject</span> is not disabled
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sObject</span> could not be found<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - Optional: Object to check (default = <span class="macro">@Username</span>). Can be specified as Fully Qualified Domain Name (FQDN) or sAMAccountName<br/>
+<b>Kommentare:</b> A $ sign must be appended to the computer name to create a correct sAMAccountName e.g. <span class="macro">@ComputerName</span> & "$"<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_DisableObject">_AD_DisableObject</a>, <a href="#_AD_EnableObject">_AD_EnableObject</a>, <a href="#_AD_GetObjectsDisabled">_AD_GetObjectsDisabled</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_IsObjectLocked"/>
+<h3>_AD_IsObjectLocked</h3>
+<div class="funcheader" >_AD_IsObjectLocked($sObject = @UserName)</div>
+<b>Beschreibung:</b> Returns 1 if the object (user account, computer account) is locked.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1, Specified object is locked, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - number of minutes till the account is unlocked. -1 means the account has to be unlocked manually by an admin
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - <span class="variable">$sObject</span> is not locked
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sObject</span> could not be found<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - Optional: Object to check (default = <span class="macro">@Username</span>). Can be specified as Fully Qualified Domain Name (FQDN) or sAMAccountName<br/>
+<b>Kommentare:</b> A $ sign must be appended to the computer name to create a correct sAMAccountName e.g. <span class="macro">@ComputerName</span> & "$"
+
+<br/>&emsp;&emsp;LockoutTime contains the timestamp when the object was locked. This value is not reset until the user/computer logs on again.
+
+<br/>&emsp;&emsp;LockoutTime could be &gt; 0 even when the lockout already has expired.<br/>
+<b>Autor:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_GetObjectsLocked">_AD_GetObjectsLocked</a>, <a href="#_AD_UnlockObject">_AD_UnlockObject</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_IsPasswordExpired"/>
+<h3>_AD_IsPasswordExpired</h3>
+<div class="funcheader" >_AD_IsPasswordExpired($sAccount = @UserName)</div>
+<b>Beschreibung:</b> Returns 1 if the password of the user or computer account has expired.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1, The password of the specified account has expired
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - Password for <span class="variable">$sAccount</span> has not expired
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sAccount</span> could not be found
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error as returned by function _AD_GetPasswordInfo<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sAccount</span> - Optional: User or computer account to check (default = <span class="macro">@Username</span>). Can be specified as Fully Qualified Domain Name (FQDN) or sAMAccountName<br/>
+<b>Kommentare:</b> Correctly works with fine-grained passwort policy<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_GetPasswordExpired">_AD_GetPasswordExpired</a>, <a href="#_AD_GetPasswordDontExpire">_AD_GetPasswordDontExpire</a>, <a href="#_AD_SetPassword">_AD_SetPassword</a>, <a href="#_AD_DisablePasswordExpire">_AD_DisablePasswordExpire</a>, <a href="#_AD_EnablePasswordExpire">_AD_EnablePasswordExpire</a>, <a href="#_AD_EnablePasswordChange">_AD_EnablePasswordChange</a>,  <a href="#_AD_DisablePasswordChange">_AD_DisablePasswordChange</a>, <a href="#_AD_GetPasswordInfo">_AD_GetPasswordInfo</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetObjectsDisabled"/>
+<h3>_AD_GetObjectsDisabled</h3>
+<div class="funcheader" >_AD_GetObjectsDisabled($sClass = "user", $sRoot = "")</div>
+<b>Beschreibung:</b> Returns an array with FQDNs of disabled objects (user accounts, computer accounts).<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - array of user or computer account FQDNs
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sClass</span> is invalid. Values can be "computer" or "user"
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Specified <span class="variable">$sRoot</span> does not exist<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sClass</span> - Optional: Specifies if disabled user accounts or computer accounts should be returned (default = "user").
+
+<br/>&emsp;&emsp;&emsp;&emsp;"user"     - Returns objects of category "user"
+
+<br/>&emsp;&emsp;&emsp;&emsp;"computer" - Returns objects of category "computer"
+
+<br/>&emsp;&emsp;<span class="variable">$sRoot</span>  - Optional: FQDN of the OU where the search should start (default = "" = search the whole tree)<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_IsObjectDisabled">_AD_IsObjectDisabled</a>, <a href="#_AD_DisableObject">_AD_DisableObject</a>, <a href="#_AD_EnableObject">_AD_EnableObject</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetObjectsLocked"/>
+<h3>_AD_GetObjectsLocked</h3>
+<div class="funcheader" >_AD_GetObjectsLocked($sClass = "user", $sRoot = "")</div>
+<b>Beschreibung:</b> Returns an array of FQDNs of locked (user and/or, computer accounts), lockout time and minutes remaining in locked state.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Returns a one-based two dimensional array with the following information:
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - FQDN of the locked object
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - lockout time YYYY/MM/DD HH:MM:SS in local time of the calling user
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Minutes until the object will be unlocked
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sClass</span> is invalid. Should be "computer" or "user"
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - No locked objects found
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - Specified <span class="variable">$sRoot</span> does not exist<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sClass</span> - Optional: Specifies if locked user accounts or computer accounts should be returned (default = "user").
+
+<br/>&emsp;&emsp;&emsp;&emsp;"user" - Returns objects of category "user"
+
+<br/>&emsp;&emsp;&emsp;&emsp;"computer" - Returns objects of category "computer"
+
+<br/>&emsp;&emsp;<span class="variable">$sRoot</span>  - Optional: FQDN of the OU where the search should start (default = "" = search the whole tree)<br/>
+<b>Kommentare:</b> LockoutTime contains the timestamp when the object was locked. This value is not reset until the user/computer logs on again.
+
+<br/>&emsp;&emsp;LockoutTime could be &gt; 0 even when the lockout has already expired.<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_IsObjectLocked">_AD_IsObjectLocked</a>, <a href="#_AD_UnlockObject">_AD_UnlockObject</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetPasswordExpired"/>
+<h3>_AD_GetPasswordExpired</h3>
+<div class="funcheader" >_AD_GetPasswordExpired($sRoot = "", $bNeverChanged = False, $iPasswordAge = 0, $bComputer = False)</div>
+<b>Beschreibung:</b> Returns an array of FQDNs of user or computer accounts with expired passwords.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - One-based two dimensional array of FQDNs of accounts with expired passwords
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - FQDNs of accounts with expired password
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - password last set YYYY/MM/DD HH:NMM:SS UTC
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - password last set YYYY/MM/DD HH:NMM:SS local time of calling user
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - No expired passwords found. <span class="macro">@extended</span> is set to the error returned by LDAP
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Specified <span class="variable">$sRoot</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - <span class="variable">$iPasswordAge</span> is not numeric<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sRoot</span>         - Optional: FQDN of the OU where the search should start (default = "" = search the whole tree)
+
+<br/>&emsp;&emsp;<span class="variable">$bNeverChanged</span> - Optional: If set to True returns all accounts who have never changed their password as well (default = False)
+
+<br/>&emsp;&emsp;<span class="variable">$iPasswordAge</span>  - Optional: Takes the max. password age from the AD or uses this value if &gt; 0
+
+<br/>&emsp;&emsp;<span class="variable">$bComputer</span>     - Optional: If True queries computer accounts, if False queries user accounts (default = False)<br/>
+<b>Autor:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_IsPasswordExpired">_AD_IsPasswordExpired</a>, <a href="#_AD_GetPasswordDontExpire">_AD_GetPasswordDontExpire</a>, <a href="#_AD_SetPassword">_AD_SetPassword</a>, <a href="#_AD_DisablePasswordExpire">_AD_DisablePasswordExpire</a>, <a href="#_AD_EnablePasswordExpire">_AD_EnablePasswordExpire</a>, <a href="#_AD_EnablePasswordChange">_AD_EnablePasswordChange</a>,  <a href="#_AD_DisablePasswordChange">_AD_DisablePasswordChange</a>, <a href="#_AD_GetPasswordInfo">_AD_GetPasswordInfo</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetPasswordDontExpire"/>
+<h3>_AD_GetPasswordDontExpire</h3>
+<div class="funcheader" >_AD_GetPasswordDontExpire($sRoot = "")</div>
+<b>Beschreibung:</b> Returns an array of user account FQDNs where the password does not expire.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Array with FQDNs of user accounts for which the password does not expire
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - No user accounts for which the password does not expire. <span class="macro">@extended</span> is set to the error returned by LDAP
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Specified <span class="variable">$sRoot</span> does not exist<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sRoot</span> - Optional: FQDN of the OU where the search should start (default = "" = search the whole tree)<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_IsPasswordExpired">_AD_IsPasswordExpired</a>, <a href="#_AD_GetPasswordExpired">_AD_GetPasswordExpired</a>, <a href="#_AD_SetPassword">_AD_SetPassword</a>, <a href="#_AD_DisablePasswordExpire">_AD_DisablePasswordExpire</a>, <a href="#_AD_EnablePasswordExpire">_AD_EnablePasswordExpire</a>, <a href="#_AD_EnablePasswordChange">_AD_EnablePasswordChange</a>,  <a href="#_AD_DisablePasswordChange">_AD_DisablePasswordChange</a>, <a href="#_AD_GetPasswordInfo">_AD_GetPasswordInfo</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetObjectProperties"/>
+<h3>_AD_GetObjectProperties</h3>
+<div class="funcheader" >_AD_GetObjectProperties($vObject = @UserName, $sProperties = "", $bSort = True)</div>
+<b>Beschreibung:</b> Returns a two-dimensional array of all or selected properties and their values of an object in readable form.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Returns a one based two-dimensional array with all properties and their values of an object in readable form
+
+<br/>&emsp;&emsp;Failure - "" or property name, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$vObject</span> could not be found
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - No values for the specified property. The name of the property in error is returned as the function result
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - Error retrieving <span class="variable">$vObject</span>. <span class="macro">@Extended</span> is set to the error returned by LDAP<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$vObject</span>     - Optional: SamAccountName, FQDN or ADSPath of the object to retrieve properties from (e.g. computer, user, group ...) (default = <span class="macro">@Username</span>)
+
+<br/>&emsp;&emsp;&emsp;&emsp;Can be of type object as well. Useful to get properties for a schema or configuration object (see _AD_ListRootDSEAttributes)
+
+<br/>&emsp;&emsp;<span class="variable">$sProperties</span> - Optional: Comma separated list of properties to return (default = "" = return all properties)
+
+<br/>&emsp;&emsp;<span class="variable">$bSort</span>       - Optional: True specifies that the array will be sorted on property name (default = True)<br/>
+<b>Kommentare:</b> Dates are returned in format: YYYY/MM/DD HH:MM:SS local time of the calling user (AD stores all dates in UTC - Universal Time Coordinated)
+
+<br/>&emsp;&emsp;Exception: AD internal dates like "whenCreated", "whenChanged" and "dSCorePropagationData". They are returned as UTC
+
+<br/>&emsp;&emsp;NT Security Descriptors are returned as: Control:nn, Group:Domain\Group, Owner:Domain\Group, Revision:nn
+
+<br/>&emsp;&emsp;No error is returned if there are properties in <span class="variable">$sProperties</span> that are not available for the selected object
+;+
+
+<br/>&emsp;&emsp;Properties are returned in alphabetical order. If <span class="variable">$sProperties</span> is set to "samaccountname,displayname" the returned array will contain
+
+<br/>&emsp;&emsp;displayname as the first and samaccountname as the second row.<br/>
+<b>Autor:</b> Sundance<br/>
+<b>Modifiziert:</b> water<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_CreateOU"/>
+<h3>_AD_CreateOU</h3>
+<div class="funcheader" >_AD_CreateOU($sParentOU, $sOU)</div>
+<b>Beschreibung:</b> Creates a child OU in the specified parent OU.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sParentOU</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - <span class="variable">$sOU</span> in <span class="variable">$sParentOU</span> already exists
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - <span class="variable">$sOU</span> is missing
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by Create or SetInfo method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sParentOU</span> - Parent OU where the new OU will be created (FQDN)
+
+<br/>&emsp;&emsp;<span class="variable">$sOU</span> - OU to create in the the parent OU (Name without leading "OU=")<br/>
+<b>Kommentare:</b> This does not create any attributes for the OU. Use function _AD_ModifyAttribute.<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_CreateUser">_AD_CreateUser</a>, <a href="#_AD_CreateGroup">_AD_CreateGroup</a>, <a href="#_AD_AddUserToGroup">_AD_AddUserToGroup</a>, <a href="#_AD_RemoveUserFromGroup">_AD_RemoveUserFromGroup</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_CreateUser"/>
+<h3>_AD_CreateUser</h3>
+<div class="funcheader" >_AD_CreateUser($sOU, $sUser, $sCN)</div>
+<b>Beschreibung:</b> Creates and activates a user in the specified OU.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sUser</span> already exists
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - <span class="variable">$sOU</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - <span class="variable">$sCN</span> is missing
+
+<br/>&emsp;&emsp;&emsp;&emsp;4 - <span class="variable">$sUser</span> is missing
+
+<br/>&emsp;&emsp;&emsp;&emsp;5 - <span class="variable">$sUser</span> could not be created. <span class="macro">@extended</span> is set to the error returned by LDAP
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by SetInfo method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sOU</span> - OU to create the user in. Form is "OU=sampleou,OU=sampleparent,DC=sampledomain1,DC=sampledomain2"
+
+<br/>&emsp;&emsp;<span class="variable">$sUser</span> - Username, form is SamAccountName without leading 'CN='
+
+<br/>&emsp;&emsp;<span class="variable">$sCN</span> - Common Name (without CN=) or RDN (Relative Distinguished Name) like "Lastname Firstname"<br/>
+<b>Kommentare:</b> This function only sets sAMAccountName (= <span class="variable">$sUser</span>) and userPrincipalName (e.g. <span class="variable">$sUser</span><span class="macro">@microsoft</span>.com).
+
+<br/>&emsp;&emsp;All other attributes have to be set using function _AD_ModifyAttribute<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_CreateOU">_AD_CreateOU</a>, <a href="#_AD_CreateGroup">_AD_CreateGroup</a>, <a href="#_AD_AddUserToGroup">_AD_AddUserToGroup</a>, <a href="#_AD_RemoveUserFromGroup">_AD_RemoveUserFromGroup</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_SetPassword"/>
+<h3>_AD_SetPassword</h3>
+<div class="funcheader" >_AD_SetPassword($sObject, $sAD_Password = "", $iExpired = 0)</div>
+<b>Beschreibung:</b> Sets or clears the password for a user or computer.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sObject</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by SetPassword or SetInfo method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - User or computer for which to set the password (FQDN or sAMAccountName)
+
+<br/>&emsp;&emsp;<span class="variable">$sAD_Password</span> - Optional: Password to be set for <span class="variable">$sObject</span>. If <span class="variable">$sAD_Password</span> is "" then the password will be cleared (default)
+
+<br/>&emsp;&emsp;<span class="variable">$iExpired</span> - Optional: 1 = the password has to be changed at next logon (Default = 0)<br/>
+<b>Kommentare:</b> Changing the password for a computer does a "reset" so the computer can be rejoined to the domain with the same SID.<br/>
+<b>Autor:</b> KenE<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_IsPasswordExpired">_AD_IsPasswordExpired</a>, <a href="#_AD_GetPasswordExpired">_AD_GetPasswordExpired</a>, <a href="#_AD_GetPasswordDontExpire">_AD_GetPasswordDontExpire</a>, <a href="#_AD_DisablePasswordExpire">_AD_DisablePasswordExpire</a>, <a href="#_AD_EnablePasswordExpire">_AD_EnablePasswordExpire</a>, <a href="#_AD_EnablePasswordChange">_AD_EnablePasswordChange</a>,  <a href="#_AD_DisablePasswordChange">_AD_DisablePasswordChange</a>, <a href="#_AD_GetPasswordInfo">_AD_GetPasswordInfo</a>, <a href="#_AD_ChangePassword">_AD_ChangePassword</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_ChangePassword"/>
+<h3>_AD_ChangePassword</h3>
+<div class="funcheader" >_AD_ChangePassword($sOldPW, $sNewPW)</div>
+<b>Beschreibung:</b> Changes the password for the currently logged on user.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Error accessing the current user object
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Error returned by ChangePassword method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sOldPW</span> - Old password of the user
+
+<br/>&emsp;&emsp;<span class="variable">$sNewPW</span> - New password to be set for the user<br/>
+<b>Kommentare:</b> This allows a logged on user without elevated permissions to change his password.<br/>
+<b>Autor:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_IsPasswordExpired">_AD_IsPasswordExpired</a>, <a href="#_AD_GetPasswordExpired">_AD_GetPasswordExpired</a>, <a href="#_AD_GetPasswordDontExpire">_AD_GetPasswordDontExpire</a>, <a href="#_AD_DisablePasswordExpire">_AD_DisablePasswordExpire</a>, <a href="#_AD_EnablePasswordExpire">_AD_EnablePasswordExpire</a>, <a href="#_AD_EnablePasswordChange">_AD_EnablePasswordChange</a>,  <a href="#_AD_DisablePasswordChange">_AD_DisablePasswordChange</a>, <a href="#_AD_GetPasswordInfo">_AD_GetPasswordInfo</a>, <a href="#_AD_SetPassword">_AD_SetPassword</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_CreateGroup"/>
+<h3>_AD_CreateGroup</h3>
+<div class="funcheader" >_AD_CreateGroup($sOU, $sGroup, $iType = $ADS_GROUP_TYPE_GLOBAL_SECURITY)</div>
+<b>Beschreibung:</b> Creates a group in the specified OU.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sGroup</span> already exists
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - <span class="variable">$sOU</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by Create or SetInfo method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sOU</span> - OU to create the group in. Form is "OU=sampleou,OU=sampleparent,DC=sampledomain1,DC=sampledomain2" (FQDN)
+
+<br/>&emsp;&emsp;<span class="variable">$sGroup</span> - Groupname, form is SamAccountName without leading 'CN='
+
+<br/>&emsp;&emsp;<span class="variable">$iType</span> - Optional: Group type (default = <span class="variable">$ADS_GROUP_TYPE_GLOBAL_SECURITY</span>). NOTE: Global security must be 'BitOr'ed with a scope.<br/>
+<b>Kommentare:</b> This function only sets sAMAccountName and grouptype. All other attributes have to be set using
+
+<br/>&emsp;&emsp;function _AD_ModifyAttribute<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_CreateOU">_AD_CreateOU</a>, <a href="#_AD_CreateUser">_AD_CreateUser</a>, <a href="#_AD_AddUserToGroup">_AD_AddUserToGroup</a>, <a href="#_AD_RemoveUserFromGroup">_AD_RemoveUserFromGroup</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_AddUserToGroup"/>
+<h3>_AD_AddUserToGroup</h3>
+<div class="funcheader" >_AD_AddUserToGroup($sGroup, $sUser)</div>
+<b>Beschreibung:</b> Adds a user or computer to the specified group.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sGroup</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - <span class="variable">$sUser</span> (user or computer) does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - <span class="variable">$sUser</span> (user or computer) is already a member of <span class="variable">$sGroup</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by Add or SetInfo method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sGroup</span> - Groupname (FQDN or sAMAccountName)
+
+<br/>&emsp;&emsp;<span class="variable">$sUser</span> - Username or computername to be added to the group (FQDN or sAMAccountName)<br/>
+<b>Kommentare:</b> Works for both computers and groups. The sAMAccountname of a computer requires a trailing "$" before converting it to a FQDN.<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_CreateOU">_AD_CreateOU</a>, <a href="#_AD_CreateUser">_AD_CreateUser</a>, <a href="#_AD_CreateGroup">_AD_CreateGroup</a>, <a href="#_AD_RemoveUserFromGroup">_AD_RemoveUserFromGroup</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_RemoveUserFromGroup"/>
+<h3>_AD_RemoveUserFromGroup</h3>
+<div class="funcheader" >_AD_RemoveUserFromGroup($sGroup, $sUser)</div>
+<b>Beschreibung:</b> Removes a user or computer from the specified group.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sGroup</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - <span class="variable">$sUser</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - <span class="variable">$sUser</span> is not a member of <span class="variable">$sGroup</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by Remove or SetInfo method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sGroup</span> - Groupname (FQDN or sAMAccountName)
+
+<br/>&emsp;&emsp;<span class="variable">$sUser</span> - Username (FQDN or sAMAccountName)<br/>
+<b>Kommentare:</b> Works for computer objects as well. Remember that the sAMAccountname of a computer needs a trailing "$" before converting it to a FQDN.<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_CreateOU">_AD_CreateOU</a>, <a href="#_AD_CreateUser">_AD_CreateUser</a>, <a href="#_AD_CreateGroup">_AD_CreateGroup</a>, <a href="#_AD_AddUserToGroup">_AD_AddUserToGroup</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_CreateComputer"/>
+<h3>_AD_CreateComputer</h3>
+<div class="funcheader" >_AD_CreateComputer($sOU, $sComputer, $sUser)</div>
+<b>Beschreibung:</b> Creates and enables a computer account. A specific, authenticated user/group can then use this account to add his or her workstation to the domain.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sOU</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - <span class="variable">$sComputer</span> already defined in <span class="variable">$sOU</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - <span class="variable">$sUser</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by Create or SetInfo method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sOU</span> - OU to create the computer in. Form is "OU=sampleou,OU=sampleparent,DC=sampledomain1,DC=sampledomain2" (FQDN)
+
+<br/>&emsp;&emsp;<span class="variable">$sComputer</span> - Computername, form is SamAccountName without trailing "$"
+
+<br/>&emsp;&emsp;<span class="variable">$sUser</span> - User or group that will be allowed to add the computer to the domain (SamAccountName)<br/>
+<b>Kommentare:</b> By default, any authenticated user can create up to 10 computer accounts in the domain (machine account quota).
+
+<br/>&emsp;&emsp;(see: <a target="_blank" href="http://technet.microsoft.com/en-us/library/cc780195(WS.10">technet.microsoft.com/en-us/library/cc780195(WS.10</a>).aspx)
+
+<br/>&emsp;&emsp;To create the Access Control List you need certain permissions. If this permissions are missing you might be able to add the
+
+<br/>&emsp;&emsp;computer to the domain but the function will exit with failure and the ACL is not set.
+;+
+
+<br/>&emsp;&emsp;Creating a computer object in AD does not permit a user to join a computer to the domain.
+
+<br/>&emsp;&emsp;Certain permissions have to be granted so that the user has rights to modify the computer object.
+
+<br/>&emsp;&emsp;When you create a computer account using the ADUC snap-in you have the option to select a
+
+<br/>&emsp;&emsp;user or group to manage the computer object and join a computer to the domain using that object.
+;+
+
+<br/>&emsp;&emsp;When you use that method, the following access control entries (ACEs) are added to the
+
+<br/>&emsp;&emsp;access control list (ACL) of the computer object:
+
+<br/>&emsp;&emsp;* List Contents, Read All Properties, Delete, Delete Subtree, Read Permissions, All
+
+<br/>&emsp;&emsp;Extended Rights (i.e., Allowed to Authenticate, Change Password, Send As, Receive As, Reset Password)
+
+<br/>&emsp;&emsp;* Write Property for description
+
+<br/>&emsp;&emsp;* Write Property for sAMAccountName
+
+<br/>&emsp;&emsp;* Write Property for displayName
+
+<br/>&emsp;&emsp;* Write Property for Logon Information
+
+<br/>&emsp;&emsp;* Write Property for Account Restrictions
+
+<br/>&emsp;&emsp;* Validate write to DNS host name
+
+<br/>&emsp;&emsp;* Validated write for service principal name<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_CreateOU">_AD_CreateOU</a>, <a href="#_AD_JoinDomain">_AD_JoinDomain</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_ModifyAttribute"/>
+<h3>_AD_ModifyAttribute</h3>
+<div class="funcheader" >_AD_ModifyAttribute($sObject, $sAttribute, $sValue = "", $iOption = 1)</div>
+<b>Beschreibung:</b> Modifies an attribute of the given object to the value specified.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sObject</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by SetInfo method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - Object (user, group ...) to add/delete/modify an attribute (sAMAccountName or FQDN)
+
+<br/>&emsp;&emsp;<span class="variable">$sAttribute</span> - Attribute to add/delete/modify
+
+<br/>&emsp;&emsp;<span class="variable">$sValue</span> - Optional: Value to modify the attribute to. Use a blank string ("") to delete the attribute (default).
+
+<br/>&emsp;&emsp;+<span class="variable">$sValue</span> can be a single value (as a string) or a multi-value (as a one-dimensional array)
+
+<br/>&emsp;&emsp;<span class="variable">$iOption</span> - Optional: Indicates the mode of modification: Append, Replace, Remove, and Delete
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - CLEAR: remove all the property value(s) from the object (default when <span class="variable">$svalue</span> = "")
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - UPDATE: replace the current value(s) with the specified value(s)
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - APPEND: append the specified value(s) to the existing values(s)
+
+<br/>&emsp;&emsp;&emsp;&emsp;4 - DELETE: delete the specified value(s) from the object<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_GetObjectAttribute">_AD_GetObjectAttribute</a>, <a href="#_AD_GetObjectProperties">_AD_GetObjectProperties</a>, <a href="#_AD_AddEmailAddress">_AD_AddEmailAddress</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_RenameObject"/>
+<h3>_AD_RenameObject</h3>
+<div class="funcheader" >_AD_RenameObject($sObject, $sCN)</div>
+<b>Beschreibung:</b> Renames an object within an OU.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sObject</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by MoveHere function (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - Object (user, group, computer) to rename (FQDN or sAMAccountName)
+
+<br/>&emsp;&emsp;<span class="variable">$sCN</span> - New Name (relative name) of the object in the current OU without CN=<br/>
+<b>Kommentare:</b> Renames an object within the same OU. You can not move objects to another OU with this function.<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_MoveObject">_AD_MoveObject</a>, <a href="#_AD_DeleteObject">_AD_DeleteObject</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_MoveObject"/>
+<h3>_AD_MoveObject</h3>
+<div class="funcheader" >_AD_MoveObject($sOU, $sObject, $sCN = "")</div>
+<b>Beschreibung:</b> Moves an object to another OU.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sOU</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - <span class="variable">$sObject</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - Object already exists in the target OU
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by MoveHere function (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sOU</span> - Target OU for the object move (FQDN)
+
+<br/>&emsp;&emsp;<span class="variable">$sObject</span> - Object (user, group, computer) to move (FQDN or sAMAccountName)
+
+<br/>&emsp;&emsp;<span class="variable">$sCN</span> - Optional: New Name of the object in the target OU. Common Name or RDN (Relative Distinguished Name) like "Lastname Firstname" without leading "CN="<br/>
+<b>Kommentare:</b> You must escape commas in <span class="variable">$sObject</span> with a backslash. E.g. "CN=Lastname\, Firstname,OU=..."
+
+<br/>&emsp;&emsp;If you want to move an OU you have to specify <span class="variable">$sObject</span> as FQDN. OUs do not have a SamAccountName<br/>
+<b>Autor:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_RenameObject">_AD_RenameObject</a>, <a href="#_AD_DeleteObject">_AD_DeleteObject</a>, <a href="#_AD_DeleteSubTree">_AD_DeleteSubTree</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_DeleteObject"/>
+<h3>_AD_DeleteObject</h3>
+<div class="funcheader" >_AD_DeleteObject($sObject, $sClass)</div>
+<b>Beschreibung:</b> Deletes the specified object.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sObject</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by Delete function (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - Object (user, group, computer, OU etc.) to delete (FQDN or sAMAccountName)
+
+<br/>&emsp;&emsp;<span class="variable">$sClass</span> - The schema class object to delete ("user", "computer", "group", "contact" etc). Can be derived using _AD_GetObjectClass().<br/>
+<b>Kommentare:</b> The function can only delete leaf objects. If you want to delete an object containing other objects you first have to delete the contained objects.<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_RenameObject">_AD_RenameObject</a>, <a href="#_AD_MoveObject">_AD_MoveObject</a>, <a href="#_AD_DeleteSubTree">_AD_DeleteSubTree</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_DeleteSubtree"/>
+<h3>_AD_DeleteSubtree</h3>
+<div class="funcheader" >_AD_DeleteSubtree($sObject, $iFlag = 0, $iRecursion = 0)</div>
+<b>Beschreibung:</b> Deletes the specified object including all child objects of this object.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - The distinguishedName of the object raising the error, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sObject</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Error returned by DeleteObject method for an object (Missing permission etc.). <span class="macro">@extended</span> holds the COM error code.
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - Error returned by DeleteObject method for an OU (Missing permission etc.). <span class="macro">@extended</span> holds the COM error code.<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - Object (user, group, computer, OU etc.) to delete (FQDN or sAMAccountName)
+
+<span class="optparam"><br/>&emsp;&emsp;<span class="variable">$iFlag</span>   (Optional) -  Specifies how to process child objects. Can be:</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp; 0 - Deletes <span class="variable">$sObject</span>, all child containers and all leaf objects (default)
+
+<br/>&emsp;&emsp;&emsp;&emsp; 1 - Only deletes leaf objects. <span class="variable">$sObject</span> and all child containers remain active. Means: The subtree will be cleared.
+
+<br/>&emsp;&emsp;&emsp;&emsp; 2 - Deletes child leaf and container objects. Means: The subtree will be deleted, only <span class="variable">$sObject</span> remains.<br/>
+<b>Kommentare:</b> Leaf: An object without child objects
+
+<br/>&emsp;&emsp;Container: An object that can hold child objects (leafs or containers)<br/>
+<b>Autor:</b> water<br/>
+<b>Modifiziert:</b> The function only handles OUs as container objects at the moment.<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_RenameObject">_AD_RenameObject</a>, <a href="#_AD_MoveObject">_AD_MoveObject</a>, <a href="#_AD_DeleteObject">_AD_DeleteObject</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_SetAccountExpire"/>
+<h3>_AD_SetAccountExpire</h3>
+<div class="funcheader" >_AD_SetAccountExpire($sObject, $sDateTime)</div>
+<b>Beschreibung:</b> Modifies the specified user or computer account expiration date/time or sets the account to never expire.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sObject</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by SetInfo method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - User or computer account to set expiration date/time (sAMAccountName or FQDN)
+
+<br/>&emsp;&emsp;<span class="variable">$sDateTime</span> - Expiration date/time in format: yyyy-mm-dd hh:mm:ss (local time) or "01/01/1970" to never expire<br/>
+<b>Kommentare:</b> Use the following syntax for the date/time:
+
+<br/>&emsp;&emsp;01/01/1970 = never expire
+
+<br/>&emsp;&emsp;yyyy-mm-dd hh:mm:ss= "international format" - always works
+
+<br/>&emsp;&emsp;xx/xx/xx &lt;time&gt; = "localized format" - the format depends on the local date/time settings
+;+
+
+<br/>&emsp;&emsp;Microsoft:
+
+<br/>&emsp;&emsp;The date when the account expires. This value represents the number of 100-nanosecond intervals since January 1, 1601 (UTC).
+
+<br/>&emsp;&emsp;A value of 0 or <span class="hex">0x7FFFFFFFFFFFFFFF</span> (9223372036854775807) indicates that the account never expires.
+;+
+
+<br/>&emsp;&emsp;Richard L. Mueller:
+
+<br/>&emsp;&emsp;"In Active Directory Users and Computers you can specify the date when a user account expires on the "Account"
+
+<br/>&emsp;&emsp;tab of the user properties dialog. This date is stored in the accountExpires attribute of the user object.
+
+<br/>&emsp;&emsp;There is also a property method called AccountExpirationDate, exposed by the IADsUser interface, that can be
+
+<br/>&emsp;&emsp;used to display and set this date. If you've ever compared accountExpires and AccountExpirationDate with the
+
+<br/>&emsp;&emsp;date shown in ADUC, you may have wondered what's going on. It is common for the values to differ by a day,
+
+<br/>&emsp;&emsp;sometimes even two days."<br/>
+<b>Autor:</b> KenE<br/>
+<b>Modifiziert:</b> water<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_DisablePasswordExpire"/>
+<h3>_AD_DisablePasswordExpire</h3>
+<div class="funcheader" >_AD_DisablePasswordExpire($sObject)</div>
+<b>Beschreibung:</b> Modifies specified users password to not expire.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sObject</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by Put or SetInfo method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - User account to disable password expiration (sAMAccountName or FQDN)<br/>
+<b>Autor:</b> KenE<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_IsPasswordExpired">_AD_IsPasswordExpired</a>, <a href="#_AD_GetPasswordExpired">_AD_GetPasswordExpired</a>, <a href="#_AD_GetPasswordDontExpire">_AD_GetPasswordDontExpire</a>, <a href="#_AD_SetPassword">_AD_SetPassword</a>, <a href="#_AD_EnablePasswordChange">_AD_EnablePasswordChange</a>,  <a href="#_AD_DisablePasswordChange">_AD_DisablePasswordChange</a>, <a href="#_AD_GetPasswordInfo">_AD_GetPasswordInfo</a>, <a href="#_AD_EnablePasswordExpire">_AD_EnablePasswordExpire</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_EnablePasswordExpire"/>
+<h3>_AD_EnablePasswordExpire</h3>
+<div class="funcheader" >_AD_EnablePasswordExpire($sObject)</div>
+<b>Beschreibung:</b> Sets users password to expire.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sObject</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by SetInfo method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - User account to enable password expiration (sAMAccountName or FQDN)<br/>
+<b>Autor:</b> Joe2010<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_IsPasswordExpired">_AD_IsPasswordExpired</a>, <a href="#_AD_GetPasswordExpired">_AD_GetPasswordExpired</a>, <a href="#_AD_GetPasswordDontExpire">_AD_GetPasswordDontExpire</a>, <a href="#_AD_SetPassword">_AD_SetPassword</a>, <a href="#_AD_EnablePasswordChange">_AD_EnablePasswordChange</a>,  <a href="#_AD_DisablePasswordChange">_AD_DisablePasswordChange</a>, <a href="#_AD_GetPasswordInfo">_AD_GetPasswordInfo</a>, <a href="#_AD_DisablePasswordExpire">_AD_DisablePasswordExpire</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_EnablePasswordChange"/>
+<h3>_AD_EnablePasswordChange</h3>
+<div class="funcheader" >_AD_EnablePasswordChange($sObject)</div>
+<b>Beschreibung:</b> Disables the 'User Cannot Change Password' option, allowing the user to change their password.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sObject</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by SetInfo method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - User account to enable changing the password (sAMAccountName or FQDN)<br/>
+<b>Autor:</b> KenE<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_IsPasswordExpired">_AD_IsPasswordExpired</a>, <a href="#_AD_GetPasswordExpired">_AD_GetPasswordExpired</a>, <a href="#_AD_GetPasswordDontExpire">_AD_GetPasswordDontExpire</a>, <a href="#_AD_SetPassword">_AD_SetPassword</a>, <a href="#_AD_DisablePasswordExpire">_AD_DisablePasswordExpire</a>, <a href="#_AD_EnablePasswordExpire">_AD_EnablePasswordExpire</a>, <a href="#_AD_DisablePasswordChange">_AD_DisablePasswordChange</a>, <a href="#_AD_GetPasswordInfo">_AD_GetPasswordInfo</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_DisablePasswordChange"/>
+<h3>_AD_DisablePasswordChange</h3>
+<div class="funcheader" >_AD_DisablePasswordChange($sObject)</div>
+<b>Beschreibung:</b> Enables the 'User Cannot Change Password' option, preventing the user from changing their password.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sObject</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by SetInfo method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - User account to disallow changing his password (SAMAccountNmae or FQDN)<br/>
+<b>Autor:</b> KenE<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_IsPasswordExpired">_AD_IsPasswordExpired</a>, <a href="#_AD_GetPasswordExpired">_AD_GetPasswordExpired</a>, <a href="#_AD_GetPasswordDontExpire">_AD_GetPasswordDontExpire</a>, <a href="#_AD_SetPassword">_AD_SetPassword</a>, <a href="#_AD_DisablePasswordExpire">_AD_DisablePasswordExpire</a>, <a href="#_AD_EnablePasswordExpire">_AD_EnablePasswordExpire</a>, <a href="#_AD_EnablePasswordChange">_AD_EnablePasswordChange</a>, <a href="#_AD_GetPasswordInfo">_AD_GetPasswordInfo</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_UnlockObject"/>
+<h3>_AD_UnlockObject</h3>
+<div class="funcheader" >_AD_UnlockObject($sObject)</div>
+<b>Beschreibung:</b> Unlocks an AD object (user account, computer account).<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sObject</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by SetInfo method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - User account or computer account to unlock (sAMAccountName or FQDN)<br/>
+<b>Autor:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_IsObjectLocked">_AD_IsObjectLocked</a>, <a href="#_AD_GetObjectsLocked">_AD_GetObjectsLocked</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_DisableObject"/>
+<h3>_AD_DisableObject</h3>
+<div class="funcheader" >_AD_DisableObject($sObject)</div>
+<b>Beschreibung:</b> Disables an AD object (user account, computer account).<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sObject</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by SetInfo method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - User account or computer account to disable (sAMAccountName or FQDN)<br/>
+<b>Autor:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_IsObjectDisabled">_AD_IsObjectDisabled</a>, <a href="#_AD_EnableObject">_AD_EnableObject</a>, <a href="#_AD_GetObjectsDisabled">_AD_GetObjectsDisabled</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_EnableObject"/>
+<h3>_AD_EnableObject</h3>
+<div class="funcheader" >_AD_EnableObject($sObject)</div>
+<b>Beschreibung:</b> Enables an AD object (user account, computer account).<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sObject</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by SetInfo method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - User account or computer account to enable (sAMAccountName or FQDN)<br/>
+<b>Autor:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_IsObjectDisabled">_AD_IsObjectDisabled</a>, <a href="#_AD_DisableObject">_AD_DisableObject</a>, <a href="#_AD_GetObjectsDisabled">_AD_GetObjectsDisabled</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetPasswordInfo"/>
+<h3>_AD_GetPasswordInfo</h3>
+<div class="funcheader" >_AD_GetPasswordInfo($sObject = @UserName)</div>
+<b>Beschreibung:</b> Returns password information retrieved from the domain policy and the specified user or computer account.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Returns a one-based array with the following information:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Maximum Password Age (days)
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Minimum Password Age (days)
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - Enforce Password History (# of passwords remembered)
+
+<br/>&emsp;&emsp;&emsp;&emsp;4 - Minimum Password Length
+
+<br/>&emsp;&emsp;&emsp;&emsp;5 - Account Lockout Duration (minutes). 0 means the account has to be unlocked manually by an administrator
+
+<br/>&emsp;&emsp;&emsp;&emsp;6 - Account Lockout Threshold (invalid logon attempts)
+
+<br/>&emsp;&emsp;&emsp;&emsp;7 - Reset account lockout counter after (minutes)
+
+<br/>&emsp;&emsp;&emsp;&emsp;8 - Password last changed (YYYY/MM/DD HH:MM:SS in local time of the calling user) or "1601/01/01 00:00:00" (means "Password has never been set")
+
+<br/>&emsp;&emsp;&emsp;&emsp;9 - Password expires (YYYY/MM/DD HH:MM:SS in local time of the calling user) or empty when password has not been set before or never expires
+
+<br/>&emsp;&emsp;&emsp;&emsp;10 - Password last changed (YYYY/MM/DD HH:MM:SS in UTC) or "1601/01/01 00:00:00" (means "Password has never been set")
+
+<br/>&emsp;&emsp;&emsp;&emsp;11 - Password expires (YYYY/MM/DD HH:MM:SS in UTC) or empty when password has not been set before or never expires
+
+<br/>&emsp;&emsp;&emsp;&emsp;12 - Password properties. Part of Domain Policy. A bit field to indicate complexity / storage restrictions
+
+<br/>&emsp;&emsp;&emsp;&emsp;      1 - DOMAIN_PASSWORD_COMPLEX
+
+<br/>&emsp;&emsp;&emsp;&emsp;      2 - DOMAIN_PASSWORD_NO_ANON_CHANGE
+
+<br/>&emsp;&emsp;&emsp;&emsp;      4 - DOMAIN_PASSWORD_NO_CLEAR_CHANGE
+
+<br/>&emsp;&emsp;&emsp;&emsp;      8 - DOMAIN_LOCKOUT_ADMINS
+
+<br/>&emsp;&emsp;&emsp;&emsp;     16 - DOMAIN_PASSWORD_STORE_CLEARTEXT
+
+<br/>&emsp;&emsp;&emsp;&emsp;     32 - DOMAIN_REFUSE_PASSWORD_CHANGE
+
+<br/>&emsp;&emsp;&emsp;&emsp;13 - Calculated password expiration date/time. Identical with element 9 of this array.
+
+<br/>&emsp;&emsp;&emsp;&emsp;     Returns a value even when fine grained password policy is in use; which means that most of the other elements of this array are blank or 0.
+
+<br/>&emsp;&emsp;&emsp;&emsp;     This is a Virtual Attribute (aka "Pseudo Attribute", "Constructed Attribute" or "Back-link") where the value is calculated by the LDAP Server Implementation and is not actually part of the LDAP Entry.
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sObject</span> not found
+
+<br/>&emsp;&emsp;Warning - Returns a one-based array (see Success), sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Password does not expire (User Access Control - UAC - is set)
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - Password has never been set
+
+<br/>&emsp;&emsp;&emsp;&emsp;4 - The Maximum Password Age is set to 0 in the domain. Therefore, the password does not expire
+
+<br/>&emsp;&emsp;&emsp;&emsp;The <span class="macro">@error</span> value can be a combination of the above values e.g. 5 = 2 (Password does not expire) + 3 (Password has never been set)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - Optional: User or computer account to get password info for (default = <span class="macro">@UserName</span>). Format is sAMAccountName or FQDN<br/>
+<b>Kommentare:</b> For details about password properties please check: <a target="_blank" href="http://msdn.microsoft.com/en-us/library/aa375371(v=vs.85">msdn.microsoft.com/en-us/library/aa375371(v=vs.85</a>).aspx<br/>
+<b>Autor:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_IsPasswordExpired">_AD_IsPasswordExpired</a>, <a href="#_AD_GetPasswordExpired">_AD_GetPasswordExpired</a>, <a href="#_AD_GetPasswordDontExpire">_AD_GetPasswordDontExpire</a>, <a href="#_AD_SetPassword">_AD_SetPassword</a>, <a href="#_AD_DisablePasswordExpire">_AD_DisablePasswordExpire</a>, <a href="#_AD_EnablePasswordExpire">_AD_EnablePasswordExpire</a>, <a href="#_AD_EnablePasswordChange">_AD_EnablePasswordChange</a>,  <a href="#_AD_DisablePasswordChange">_AD_DisablePasswordChange</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_ListExchangeServers"/>
+<h3>_AD_ListExchangeServers</h3>
+<div class="funcheader" >_AD_ListExchangeServers()</div>
+<b>Beschreibung:</b> Enumerates all Exchange Servers in the Forest.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Returns an one-based one dimensional array with the names of the Exchange Servers
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - No Exchange Servers found. <span class="macro">@extended</span> is set to the error returned by LDAP<br/>
+<b>Autor:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_ListExchangeMailboxStores">_AD_ListExchangeMailboxStores</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_ListExchangeMailboxStores"/>
+<h3>_AD_ListExchangeMailboxStores</h3>
+<div class="funcheader" >_AD_ListExchangeMailboxStores()</div>
+<b>Beschreibung:</b> Enumerates all Exchange Mailbox Stores in the Forest.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Returns a one-based two dimensional array with the following information:
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - name
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - cn
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - distinguishedName
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - No Exchange Mailbox Stores found. <span class="macro">@extended</span> is set to the error returned by LDAP<br/>
+<b>Autor:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_ListExchangeServers">_AD_ListExchangeServers</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetSystemInfo"/>
+<h3>_AD_GetSystemInfo</h3>
+<div class="funcheader" >_AD_GetSystemInfo()</div>
+<b>Beschreibung:</b> Retrieves data describing the local computer if it is a member of a (at least) Windows 2000 domain.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Returns an one-based one dimensional array with the following information:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - distinguished name of the local computer
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - DNS name of the local computer domain
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - short name of the local computer domain
+
+<br/>&emsp;&emsp;&emsp;&emsp;4 - DNS name of the local computer forest
+
+<br/>&emsp;&emsp;&emsp;&emsp;5 - Local computer domain status: native mode (True) or mixed mode (False)
+
+<br/>&emsp;&emsp;&emsp;&emsp;6 - distinguished name of the NTDS-DSA object for the DC that owns the primary domain controller role in the local computer domain
+
+<br/>&emsp;&emsp;&emsp;&emsp;7 - distinguished name of the NTDS-DSA object for the DC that owns the schema role in the local computer forest
+
+<br/>&emsp;&emsp;&emsp;&emsp;8 - site name of the local computer
+
+<br/>&emsp;&emsp;&emsp;&emsp;9 - distinguished name of the current user
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Creation of object "ADSystemInfo" returned an error. See <span class="macro">@extended</span><br/>
+<b>Autor:</b> water<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetManagedBy"/>
+<h3>_AD_GetManagedBy</h3>
+<div class="funcheader" >_AD_GetManagedBy($sManagedBy = "*")</div>
+<b>Beschreibung:</b> Retrieves all groups that are managed by any or the specified user.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Returns a one-based two dimensional array with the following information:
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - distinguished name of the group
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - distinguished name of the manager for this group
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sManagedBy</span> is unknown
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - No groups found. <span class="macro">@extended</span> is set to the error returned by LDAP<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sManagedBy</span> - Optional: Manager to filter the list of groups (default = *). Can be a SAMAccountname or a FQDN<br/>
+<b>Kommentare:</b> This query returns all groups that have the attribute "managedBy" set or set to the specified manager.
+;+
+
+<br/>&emsp;&emsp;To get a list of all groups that manager x manages (by querying just the user object) use:
+
+<br/>&emsp;&emsp;<span class="variable">$Result</span> = _AD_GetObjectAttribute("samAccountName of the manager","managedObjects")
+
+<br/>&emsp;&emsp;_ArrayDisplay(<span class="variable">$Result</span>)
+;+
+
+<br/>&emsp;&emsp;To return managers for OUs change "objectCategory=group" to "objectClass=organizationalUnit".<br/>
+<b>Autor:</b> water<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetManager"/>
+<h3>_AD_GetManager</h3>
+<div class="funcheader" >_AD_GetManager($sManager = "*")</div>
+<b>Beschreibung:</b> Retrieves all users that are managed by any or the specified user.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Returns a one-based two dimensional array with the following information:
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - distinguished name of the user
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - distinguished name of the manager for this user
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sManager</span> is unknown
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - No users found. <span class="macro">@extended</span> is set to the error returned by LDAP<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sManager</span> - Optional: Manager to filter the list of users (default = *). Can be sAMAccountName or FQDN<br/>
+<b>Kommentare:</b> This query returns all users that have the attribute "Manager" set or set to the specified manager.
+;+
+
+<br/>&emsp;&emsp;To get a list of all users that manager x manages (by querying just the user object) use:
+
+<br/>&emsp;&emsp;<span class="variable">$Result</span> = _AD_GetObjectAttribute("samAccountName of the manager","directReports")
+
+<br/>&emsp;&emsp;_ArrayDisplay(<span class="variable">$Result</span>)<br/>
+<b>Autor:</b> water<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetGroupAdmins"/>
+<h3>_AD_GetGroupAdmins</h3>
+<div class="funcheader" >_AD_GetGroupAdmins($sObject)</div>
+<b>Beschreibung:</b> Returns an array of the administrator sAMAccountNames for the specified group (not including the group owner/manager).<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Returns an one-based one dimensional array with the sAMAccountNames of the administrators for the specified group
+
+<br/>&emsp;&emsp;+(not including the group owner/manager)
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Group could not be found
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - No administrators found<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - group name. Can be SAMaccountName or FQDN<br/>
+<b>Autor:</b> John Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GroupManagerCanModify"/>
+<h3>_AD_GroupManagerCanModify</h3>
+<div class="funcheader" >_AD_GroupManagerCanModify($sObject)</div>
+<b>Beschreibung:</b> Returns 1 if the manager of the group can modify the member list.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1, Specified user can modify the member list
+
+<br/>&emsp;&emsp;Failure - 0, <span class="macro">@error</span> set
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Group does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - The group manager can not modify the member list
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - There is no manager assigned to the group<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - FQDN of the group<br/>
+<b>Autor:</b> John Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_GroupAssignManager">_AD_GroupAssignManager</a>, <a href="#_AD_GroupRemoveManager">_AD_GroupRemoveManager</a>, <a href="#_AD_SetGroupManagerCanModify">_AD_SetGroupManagerCanModify</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_ListPrintQueues"/>
+<h3>_AD_ListPrintQueues</h3>
+<div class="funcheader" >_AD_ListPrintQueues($sServername = "*", $sOU = "", $iSearchScope = 2, $sPrintQueues = "*")</div>
+<b>Beschreibung:</b> Enumerates all PrintQueues in the AD tree, the specified spool server or OU.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - One-based two dimensional array with the following information:
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - PrinterName: Short name of the PrintQueue
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - ServerName: SpoolServerName.Domain
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - DistinguishedName: FQDN of the PrintQueue
+
+<br/>&emsp;&emsp;Failure - "", <span class="macro">@error</span> set
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - There is no PrintQueue available. <span class="macro">@extended</span> is set to the error returned by LDAP
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Specified OU does not exist<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sServername</span>  - Optional: Short name of the spool server to process. LDAP wildcards apply (default = "*", equals "search all servers")
+
+<br/>&emsp;&emsp;<span class="variable">$sOU</span>          - Optional: The OU to retrieve from (FQDN) (default = "", equals "search the whole AD tree")
+
+<br/>&emsp;&emsp;<span class="variable">$iSearchScope</span> - Optional: 0 = base, 1 = one-level, 2 = sub-tree (default)
+
+<br/>&emsp;&emsp;<span class="variable">$sPrintQueues</span> - Optional: Short name of the printqueues to search for. LDAP wildcards apply (default = "*", equals "search all print queues")<br/>
+<b>Kommentare:</b> To get more (including multi-valued) attributes of a printqueue use _AD_GetObjectProperties<br/>
+<b>Autor:</b> water<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_SetGroupManagerCanModify"/>
+<h3>_AD_SetGroupManagerCanModify</h3>
+<div class="funcheader" >_AD_SetGroupManagerCanModify($sGroup)</div>
+<b>Beschreibung:</b> Sets the Group manager to be able to modify the member list.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, <span class="macro">@error</span> set
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sGroup</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Group manager can already modify the member list
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - <span class="variable">$sGroup</span> has no manager assigned
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by SetInfo method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sGroup</span> - Groupname (sAMAccountName or FQDN)<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_GroupAssignManager">_AD_GroupAssignManager</a>, <a href="#_AD_GroupManagerCanModify">_AD_GroupManagerCanModify</a>, <a href="#_AD_GroupRemoveManager">_AD_GroupRemoveManager</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GroupAssignManager"/>
+<h3>_AD_GroupAssignManager</h3>
+<div class="funcheader" >_AD_GroupAssignManager($sGroup, $sUser)</div>
+<b>Beschreibung:</b> Assigns the user as group manager.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, <span class="macro">@error</span> set
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sGroup</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - <span class="variable">$sUser</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by SetInfo method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sGroup</span> - Groupname (sAMAccountName or FQDN)
+
+<br/>&emsp;&emsp;<span class="variable">$sUser</span> - User to assign as manager (sAMAccountName or FQDN)<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_SetGroupManagerCanModify">_AD_SetGroupManagerCanModify</a>, <a href="#_AD_GroupManagerCanModify">_AD_GroupManagerCanModify</a>, <a href="#_AD_GroupRemoveManager">_AD_GroupRemoveManager</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GroupRemoveManager"/>
+<h3>_AD_GroupRemoveManager</h3>
+<div class="funcheader" >_AD_GroupRemoveManager($sGroup, $bFlag = False)</div>
+<b>Beschreibung:</b> Remove the group manager from a group or only remove the manager's modify permission.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, <span class="macro">@error</span> set
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sGroup</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - <span class="variable">$sGroup</span> does not have a manager assigned<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sGroup</span> - Groupname (sAMAccountName or FQDN)
+
+<br/>&emsp;&emsp;<span class="variable">$bFlag</span>  - Optional: if True the function only removes the manager's modify permission<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_SetGroupManagerCanModify">_AD_SetGroupManagerCanModify</a>, <a href="#_AD_GroupManagerCanModify">_AD_GroupManagerCanModify</a>, <a href="#_AD_GroupAssignManager">_AD_GroupAssignManager</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_AddEmailAddress"/>
+<h3>_AD_AddEmailAddress</h3>
+<div class="funcheader" >_AD_AddEmailAddress($sUser, $sNewEmail, $bPrimary = False)</div>
+<b>Beschreibung:</b> Appends an SMTP email address to the 'Email Addresses' tab of an Exchange-enabled AD account.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sUser</span> does not exist
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Could not connect to <span class="variable">$sUser</span>. <span class="macro">@extended</span> is set to the error returned by LDAP
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error returned by GetEx or SetInfo method (Missing permission etc.)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sUser</span> - User account (sAMAccountName or FQDN)
+
+<br/>&emsp;&emsp;<span class="variable">$sNewEmail</span> - Email address to add to the account
+
+<br/>&emsp;&emsp;<span class="variable">$bPrimary</span> - Optional: if True the new email address will be set as primary address<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_ModifyAttribute">_AD_ModifyAttribute</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_JoinDomain"/>
+<h3>_AD_JoinDomain</h3>
+<div class="funcheader" >_AD_JoinDomain($sComputer = @ComputerName, $sUserParam = "", $sPasswordParam = "", $sOU = Default, $iFlag = 1, $sNewName = "")</div>
+<b>Beschreibung:</b> Joins a computer to a domain.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1, sets <span class="macro">@extended</span> to the return value of the JoinDomainOrWorkgroup method:
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - indicates successful completion. No reboot required.
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - indicates successful completion with reboot required.
+
+<br/>&emsp;&emsp;Failure - 0, <span class="macro">@error</span> set
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sComputer</span> account does not exist in the domain and <span class="variable">$iFlag</span> &lt;&gt; 2
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - <span class="variable">$sUserParam</span> does not exist in the domain
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - WMI object could not be created. See <span class="macro">@extended</span> for error code. See remarks for further information
+
+<br/>&emsp;&emsp;&emsp;&emsp;4 - The computer is already a member of the domain
+
+<br/>&emsp;&emsp;&emsp;&emsp;5 - Joining the domain was not successful. <span class="macro">@extended</span> holds the Win32 error code (see: <a target="_blank" href="http://msdn.microsoft.com/en-us/library/ms681381(v=VS.85">msdn.microsoft.com/en-us/library/ms681381(v=VS.85</a>).aspx)
+
+<br/>&emsp;&emsp;&emsp;&emsp;6 - <span class="variable">$sNewName</span> account already exists. You can't rename <span class="variable">$sComputer</span> to <span class="variable">$sNewName</span>
+
+<br/>&emsp;&emsp;&emsp;&emsp;7 - Computer could not be renamed. See <span class="macro">@extended</span> for the COM error code.<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sComputer</span>      - Optional: Name of the computer to be joined to the domain (Default = <span class="macro">@ComputerName</span>)
+
+<br/>&emsp;&emsp;<span class="variable">$sUserParam</span>     - Optional: Domain user with admin rights to join the computer to the domain.
+
+<br/>&emsp;&emsp;+Supported are NetBIOSName (domain\user), user principal name (user<span class="macro">@domain</span>) or Windows login name (user).
+
+<br/>&emsp;&emsp;+(Default = credentials from _AD_Open or - if not used - of the user running the script)
+
+<br/>&emsp;&emsp;<span class="variable">$sPasswordParam</span> - Optional: Password for <span class="variable">$sUserParam</span> (Default = credentials from _AD_Open or - if not used - of the user running the script)
+
+<br/>&emsp;&emsp;<span class="variable">$sOU</span>            - Optiona: FQDN of the OU where the computer will be placed. (Default = Keyword Default = Computers container)
+
+<br/>&emsp;&emsp;<span class="variable">$iFlag</span>          - Optional: A set of bit flags (means: add the numbers for any valid combination) that specify options for joining a domain. Some of the possible flags:
+
+<br/>&emsp;&emsp;+1  - Joins a computer to a domain. Computer account must already exist in the domain (Default)
+
+<br/>&emsp;&emsp;+2  - Creates an account on a domain
+
+<br/>&emsp;&emsp;+32 - Allows a join to a new domain even if the computer is already joined to a domain
+
+<br/>&emsp;&emsp;<span class="variable">$sNewname</span>       - Optional: Name to change the computer to after joining to the domain.<br/>
+<b>Kommentare:</b> This function allows to join the computer the script is running on or any other computer to be joined to a domain.
+
+<br/>&emsp;&emsp;The domain the computer is joined to is the domain the user logged on to by using AD_Open.
+
+<br/>&emsp;&emsp;If no credentials are passed to this function but have been used with _AD_Open() then the _AD_Open credentials will be used.
+
+<br/>&emsp;&emsp;Using default credentials of the user running the script is only sensible when you are logged on to the domain and try to join another computer.
+
+<br/>&emsp;&emsp;You have to make sure to use a valid <span class="variable">$iFlag</span>. The function does not check it. Most used are 1 (join) and 3 (create computer account and join).
+
+<br/>&emsp;&emsp;You have to reboot the computer after a successful join to the domain.
+
+<br/>&emsp;&emsp;The JoinDomainOrWorkgroup method is available only on Windows XP computer and Windows Server 2003 or later.<br/>
+<b>Autor:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_CreateComputer">_AD_CreateComputer</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_UnJoinDomain"/>
+<h3>_AD_UnJoinDomain</h3>
+<div class="funcheader" >_AD_UnJoinDomain($sComputer = @ComputerName, $sWorkgroup = "", $sUserParam = "", $sPasswordParam = "")</div>
+<b>Beschreibung:</b> Unjoins the computer from its current domain and disables the computer account.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, <span class="macro">@error</span> set
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sComputer</span> account does not exist in the domain
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - <span class="variable">$sUserParam</span> does not exist in the domain
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - WMI object could not be created. See <span class="macro">@extended</span> for the COM error code. See remarks for further information
+
+<br/>&emsp;&emsp;&emsp;&emsp;4 - The computer is a member of another or no domain
+
+<br/>&emsp;&emsp;&emsp;&emsp;5 - Unjoining the domain was not successful. See <span class="macro">@extended</span> for the COM error code. See remarks for further information
+
+<br/>&emsp;&emsp;&emsp;&emsp;6 - Joining the Computer to the specified workgroup was not successful. See <span class="macro">@extended</span> for the COM error code<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sComputer</span>  - Optional: Computername to unjoin from the domain (Default = <span class="macro">@ComputerName</span>)
+
+<br/>&emsp;&emsp;<span class="variable">$sWorkgroup</span> - Optional: Workgroup the unjoined computer is assigned to (Default = Workgroup named like the domain the computer was unjoined from)
+
+<br/>&emsp;&emsp;<span class="variable">$sUserParam</span> - Optional: Domain user with admin rights to unjoin the computer from the domain.
+
+<br/>&emsp;&emsp;+Supported are NetBIOSName (domain\user), user principal name (user<span class="macro">@domain</span>) or Windows login name (user).
+
+<br/>&emsp;&emsp;+(Default = credentials from _AD_Open or - if not used - of the user running the script)
+
+<br/>&emsp;&emsp;<span class="variable">$sPasswordParam</span> - Optional: Password for <span class="variable">$sUserParam</span> (Default = credentials from _AD_Open or - if not used - of the user running the script)<br/>
+<b>Kommentare:</b> This function allows to unjoin the computer the script is running on or any other computer from a domain.
+
+<br/>&emsp;&emsp;The domain the computer is unjoined from is the domain the user logged on to by using AD_Open.
+
+<br/>&emsp;&emsp;If no credentials are passed to this function but have been used with _AD_Open() then the _AD_Open credentials will be used.
+
+<br/>&emsp;&emsp;If no workgroup is specified then the computer is assigned to a workgroup named like the domain the computer was unjoined from.
+
+<br/>&emsp;&emsp;You have to reboot the computer after a successful unjoin from the domain.
+
+<br/>&emsp;&emsp;The JoinDomainOrWorkgroup method is available only on Windows XP computer and Windows Server 2003 or later.<br/>
+<b>Autor:</b> water<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_IsAccountExpired"/>
+<h3>_AD_IsAccountExpired</h3>
+<div class="funcheader" >_AD_IsAccountExpired($sObject = @UserName)</div>
+<b>Beschreibung:</b> Returns 1 if the account (user, computer) has expired.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1, The specified account has expired
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - Account has not expired
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sObject</span> could not be found
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - An error occurred when accessing property AccountExpirationDate. <span class="macro">@extended</span> is set to the error returned by LDAP<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span> - Optional: Account (User, computer) to check (default = <span class="macro">@Username</span>). Can be specified as Fully Qualified Domain Name (FQDN) or sAMAccountName<br/>
+<b>Autor:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_GetAccountsExpired">_AD_GetAccountsExpired</a>, <a href="#_AD_SetAccountExpire">_AD_SetAccountExpire</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetAccountsExpired"/>
+<h3>_AD_GetAccountsExpired</h3>
+<div class="funcheader" >_AD_GetAccountsExpired($sClass = "user", $sDTEExpire = "", $sDTSExpire = "", $sRoot = "")</div>
+<b>Beschreibung:</b> Returns an array with FQDNs of expired accounts (user, computer).<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - One-based two dimensional array of FQDNs of expired accounts
+
+<br/>&emsp;&emsp;&emsp;&emsp;0 - FQDNs of expired accounts
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - account expired YYYY/MM/DD HH:NMM:SS UTC
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - account expired YYYY/MM/DD HH:NMM:SS local time of calling user
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - No expired accounts found. <span class="macro">@extended</span> is set to the error returned by LDAP
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Specified date/time is invalid
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - Invalid value for <span class="variable">$sClass</span>. Has to be "user" or "computer"
+
+<br/>&emsp;&emsp;&emsp;&emsp;4 - Specified <span class="variable">$sRoot</span> does not exist<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sClass</span> - Optional: Specifies if expired user accounts or computer accounts should be returned (default = "user").
+
+<br/>&emsp;&emsp;&emsp;&emsp;"user" - Returns objects of category "user"
+
+<br/>&emsp;&emsp;&emsp;&emsp;"computer" - Returns objects of category "computer"
+
+<br/>&emsp;&emsp;<span class="variable">$sDTEExpire</span> - YYYY/MM/DD HH:MM:SS (local time) returns all accounts that expire between <span class="variable">$sDTSExpire</span> and the specified date/time (default = "" = Now)
+
+<br/>&emsp;&emsp;<span class="variable">$sDTSExpire</span> - YYYY/MM/DD HH:MM:SS (local time) returns all accounts that expire between the specified date/time and <span class="variable">$sDTEExpire</span> (default = "1601/01/01 00:00:00)
+
+<br/>&emsp;&emsp;<span class="variable">$sRoot</span> - Optional: FQDN of the OU where the search should start (default = "" = search the whole tree)<br/>
+<b>Autor:</b> water<br/>
+<b>&Auml;hnlich:</b> <a href="#_AD_IsAccountExpired">_AD_IsAccountExpired</a>, <a href="#_AD_SetAccountExpire">_AD_SetAccountExpire</a><br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_ListSchemaVersions"/>
+<h3>_AD_ListSchemaVersions</h3>
+<div class="funcheader" >_AD_ListSchemaVersions()</div>
+<b>Beschreibung:</b> Returns information about the AD Schema versions.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Returns an one-based one dimensional array of the following Schema versions.
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Active Directory Schema version. This can be one of the following values:
+
+<br/>&emsp;&emsp;13 - Windows 2000 Server
+
+<br/>&emsp;&emsp;30 - Windows Server 2003 RTM / Service Pack 1 / Service Pack 2
+
+<br/>&emsp;&emsp;31 - Windows Server 2003 R2
+
+<br/>&emsp;&emsp;44 - Windows Server 2008 RTM
+
+<br/>&emsp;&emsp;47 - Windows Server 2008 R2
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Exchange Schema version. This can be one of the following values:
+
+<br/>&emsp;&emsp;4397 - Exchange Server 2000 RTM
+
+<br/>&emsp;&emsp;4406 - Exchange Server 2000 With Service Pack 3
+
+<br/>&emsp;&emsp;6870 - Exchange Server 2003 RTM
+
+<br/>&emsp;&emsp;6936 - Exchange Server 2003 With Service Pack 3
+
+<br/>&emsp;&emsp;10628 - Exchange Server 2007
+
+<br/>&emsp;&emsp;11116 - Exchange 2007 With Service Pack 1
+
+<br/>&emsp;&emsp;14622 - Exchange 2007 With Service Pack 2, Exchange 2010 RTM
+
+<br/>&emsp;&emsp;14625 - Exchange 2007 SP3
+
+<br/>&emsp;&emsp;14720 - Exchange 2010 SP1 (beta)
+
+<br/>&emsp;&emsp;14726 - Exchange 2010 SP1
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - Exchange 2000 Active Directory Connector version. This can be one of the following values:
+
+<br/>&emsp;&emsp;4197 - Exchange Server 2000 RTM
+
+<br/>&emsp;&emsp;&emsp;&emsp;4 - Office Communications Server Schema version. This can be one of the following values:
+
+<br/>&emsp;&emsp;1006 - LCS 2005 SP1
+
+<br/>&emsp;&emsp;1007 - OCS 2007
+
+<br/>&emsp;&emsp;1008 - OCS 2007 R2
+
+<br/>&emsp;&emsp;1100 - Lync Server 2010<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;None<br/>
+<b>Kommentare:</b> RTM stands for "Release to Manufacturing"<br/>
+<b>Autor:</b> water<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_ObjectExistsInSchema"/>
+<h3>_AD_ObjectExistsInSchema</h3>
+<div class="funcheader" >_AD_ObjectExistsInSchema($sObject, $sProperty = "LDAPDisplayName")</div>
+<b>Beschreibung:</b> Returns 1 if exactly one object exists for the given property in the Active Directory Schema.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1, Exactly one object exists for the given property in the Active Directory Schema
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - No object found for the specified property
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - More than one object found for the specified property. x is the number of objects found<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sObject</span>   - Optional: Object to check
+
+<br/>&emsp;&emsp;<span class="variable">$sProperty</span> - Optional: Property to check (default = LDAPDisplayName)<br/>
+<b>Autor:</b> water<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_FixSpecialChars"/>
+<h3>_AD_FixSpecialChars</h3>
+<div class="funcheader" >_AD_FixSpecialChars($sText, $iOption = 0, $sEscapeChar = '"\/#,+&lt;&gt;;=')</div>
+<b>Beschreibung:</b> Escapes or unescapes special characters in Distinguished Names or LDAP filters.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;<span class="variable">$sText</span> with escaped or unescaped special characters<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sText</span> - Text to add / remove escape characters
+
+<br/>&emsp;&emsp;<span class="variable">$iOption</span> - Optional: Defines whether to escape (Default) or unescape special characters for DN or LDAP filters.
+
+<br/>&emsp;&emsp;0 = Escape special characters in a Distinguished Name (default)
+
+<br/>&emsp;&emsp;1 = Unescape special characters in a Distinguished Name
+
+<br/>&emsp;&emsp;3 = Escape special characters in a LDAP filter
+
+<br/>&emsp;&emsp;<span class="variable">$sEscapeChar</span> - Optional: List of characters to escape or unescape in a DN (default = '"\/#,+&lt;&gt;;=')<br/>
+<b>Kommentare:</b> Leading or trailing spaces have to be escaped by the user.
+
+<br/>&emsp;&emsp;<span class="variable">$sEscapeChar</span> is ignored when <span class="variable">$iOption</span> = 3.<br/>
+<b>Autor:</b> Jonathan Clelland<br/>
+<b>Modifiziert:</b> water<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetLastADSIError"/>
+<h3>_AD_GetLastADSIError</h3>
+<div class="funcheader" >_AD_GetLastADSIError()</div>
+<b>Beschreibung:</b> Retrieve the calling thread's last ADSI error code value.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - A one-based array containing the following values:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - ADSI error code (decimal)
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Unicode string that describes the error
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - name of the provider that raised the error
+
+<br/>&emsp;&emsp;&emsp;&emsp;4 - Win32 error code extracted from element[2]
+
+<br/>&emsp;&emsp;&emsp;&emsp;5 - description of the Win32 error code as returned by _WinAPI_FormatMessage
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to the return value of DLLCall<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;None<br/>
+<b>Kommentare:</b> This and more errors will be handled (error codes are in hex):
+
+<br/>&emsp;&emsp;525 - user not found
+
+<br/>&emsp;&emsp;52e - invalid credentials
+
+<br/>&emsp;&emsp;530 - not permitted to logon at this time
+
+<br/>&emsp;&emsp;532 - password expired
+
+<br/>&emsp;&emsp;533 - account disabled
+
+<br/>&emsp;&emsp;701 - account expired
+
+<br/>&emsp;&emsp;773 - user must reset password<br/>
+<b>Autor:</b> water, card0384<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_GetADOProperties"/>
+<h3>_AD_GetADOProperties</h3>
+<div class="funcheader" >_AD_GetADOProperties($sADOObject, $sProperties = "")</div>
+<b>Beschreibung:</b> Retrieves all properties of an ADO object (Connection, Command).<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - Returns a one based two-dimensional array with all properties and their values of the specified object
+
+<br/>&emsp;&emsp;Failure - "", sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - <span class="variable">$sADOObject</span> is invalid. Should either be "Command" or "Connection"<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sADOobject</span> - ADO object for which to retrieve the properties. Can be either "Connection" or "Command"
+
+<br/>&emsp;&emsp;<span class="variable">$sProperties</span> - Optional: Comma separated list of properties to return (default = "" = return all properties)<br/>
+<b>Autor:</b> water<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_SetADOProperties"/>
+<h3>_AD_SetADOProperties</h3>
+<div class="funcheader" >_AD_SetADOProperties($sP1 = "", $sP2 = "", $sP3 = "", $sP4 = "", $sP5 = "", $sP6 = "", $sP7 = "", $sP8 = "", $sP9 = "", $sP10 = "")</div>
+<b>Beschreibung:</b> Sets properties of an ADO command object.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - 1
+
+<br/>&emsp;&emsp;Failure - 0, sets <span class="macro">@error</span> to:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Invalid format of the parameter. Has to be propertyname=value. <span class="macro">@extended</span> = number of the invalid parameter (zero based)
+
+<br/>&emsp;&emsp;&emsp;&emsp;x - Error setting the specified property. <span class="macro">@extended</span> = number of the invalid parameter (zero based)<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;<span class="variable">$sP1</span>        - Property to set. This can be a string with the format propertyname=value OR
+
+<br/>&emsp;&emsp;+a zero based one-dimensional array with unlimited number of strings in the format propertyname=value
+
+<br/>&emsp;&emsp;<span class="variable">$sP2</span>        - Optional: Same as <span class="variable">$sP1</span> but no array is allowed
+
+<br/>&emsp;&emsp;<span class="variable">$sP3</span>        - Optional: Same as <span class="variable">$sP2</span>
+
+<br/>&emsp;&emsp;<span class="variable">$sP4</span>        - Optional: Same as <span class="variable">$sP2</span>
+
+<br/>&emsp;&emsp;<span class="variable">$sP5</span>        - Optional: Same as <span class="variable">$sP2</span>
+
+<br/>&emsp;&emsp;<span class="variable">$sP6</span>        - Optional: Same as <span class="variable">$sP2</span>
+
+<br/>&emsp;&emsp;<span class="variable">$sP7</span>        - Optional: Same as <span class="variable">$sP2</span>
+
+<br/>&emsp;&emsp;<span class="variable">$sP8</span>        - Optional: Same as <span class="variable">$sP2</span>
+
+<br/>&emsp;&emsp;<span class="variable">$sP9</span>        - Optional: Same as <span class="variable">$sP2</span>
+
+<br/>&emsp;&emsp;<span class="variable">$sP10</span>       - Optional: Same as <span class="variable">$sP2</span><br/>
+<b>Kommentare:</b> You can query the properties of the ADO connection and command object but you can only set the properties of the command object.
+
+<br/>&emsp;&emsp;+After the connection is opened by _AD_Open the properties of the connection object are read only.<br/>
+<b>Autor:</b> water<br/>
+<a href="#header" class="gotoheader">Nach oben</a><br/>
+<hr id="_AD_VersionInfo"/>
+<h3>_AD_VersionInfo</h3>
+<div class="funcheader" >_AD_VersionInfo()</div>
+<b>Beschreibung:</b> Returns an array of information about the AD.au3 UDF.<br/>
+<b>R&uuml;ckgabewert:</b> <br/>&emsp;&emsp;Success - one-dimensional one based array with the following information:
+
+<br/>&emsp;&emsp;&emsp;&emsp;1 - Release Type (T=Test or V=Production)
+
+<br/>&emsp;&emsp;&emsp;&emsp;2 - Major Version
+
+<br/>&emsp;&emsp;&emsp;&emsp;3 - Minor Version
+
+<br/>&emsp;&emsp;&emsp;&emsp;4 - Sub Version
+
+<br/>&emsp;&emsp;&emsp;&emsp;5 - Release Date (YYYYMMDD)
+
+<br/>&emsp;&emsp;&emsp;&emsp;6 - AutoIt version required
+
+<br/>&emsp;&emsp;&emsp;&emsp;7 - List of authors separated by ","
+
+<br/>&emsp;&emsp;&emsp;&emsp;8 - List of contributors separated by ","<br/>
+<b>Parameterliste:</b> <br/>&emsp;&emsp;None<br/>
+<b>Kommentare:</b> Based on function _IE_VersionInfo written bei Dale Hohm<br/>
+<b>Autor:</b> water<br/>
+</body></html>

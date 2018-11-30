@@ -1,0 +1,18 @@
+[Info]
+Title = Royale Noir
+Author = Azkay // Based off Royale Noir
+
+[color]
+background= 0x8A9499
+Button= 0x8A9499
+mouseover= 0x0000FF
+fontcolor= 0x000000
+
+[settings]
+size=50
+
+[icon]
+style=Bluebox1
+Isize=16
+adjustleft=30
+adjustdown=5

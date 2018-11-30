@@ -1,0 +1,17 @@
+[Info]
+Title = Gray-electric-2
+Author = Valuater
+
+[color]
+background= 0xD8D8D8
+Button=0xC4C4C4
+mouseover=0xBDCBD0
+
+[settings]
+size=50
+
+[icon]
+style=blunav
+Isize=18
+adjustleft=0
+adjustdown=20

@@ -1,0 +1,11 @@
+[Info]
+Title = Light-Blue
+Author = Valuater & 
+
+[color]
+background=0xD9F6FF
+Button=0xFF0000
+mouseover=0x8D9FC5
+
+
+[settings]

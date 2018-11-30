@@ -1,0 +1,19 @@
+[Info]
+Title = DeFacto
+Author = big_daddy
+
+[color]
+background= 0xDFDEE1
+Button=0x8F8C9D
+mouseover= 0x8E9BCC
+fontcolor= 0xFFFFFF
+
+[settings]
+size=36
+
+
+[icon]
+style=defacto
+Isize=16
+adjustleft=35
+adjustdown=9

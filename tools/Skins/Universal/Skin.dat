@@ -1,0 +1,19 @@
+[Info]
+Title = Universal
+Author = big_daddy
+
+[color]
+background=0xA6A6A6
+Button=0xD2D1D1
+mouseover=0xBE8341
+fontcolor=Black
+
+[settings]
+size=40
+
+
+[icon]
+style=Universal
+Isize=22
+adjustleft=35
+adjustdown=5

@@ -1,0 +1,13 @@
+[Info]
+Title = Sand-Paper
+Author = Valuater
+
+[color]
+background= 0xD4D4D8
+Button=0x99908C
+mouseover= 0xF6E7D1
+fontcolor= 
+; 0xFFFFFF 
+
+[settings]
+size=50

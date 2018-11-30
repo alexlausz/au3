@@ -1,0 +1,17 @@
+[Info]
+Title = Silent-green
+Author = Valuater
+
+[color]
+background=0xAAAAAA
+Button=0x15B6AA
+mouseover=0x28D22B
+
+[settings]
+size=50
+
+[icon]
+style=quick
+Isize=18
+adjustleft=15
+adjustdown=2

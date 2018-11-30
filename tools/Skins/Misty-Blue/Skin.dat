@@ -1,0 +1,12 @@
+[Info]
+Title = Misty-Blue
+Author = Valuater
+
+[color]
+background=0x004E7F
+Button=0x0185D7
+mouseover=0x0399F8 
+fontcolor= 0xFFFFFF 
+
+[settings]
+size=25

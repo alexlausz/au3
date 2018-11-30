@@ -1,0 +1,19 @@
+[Info]
+Title = Skilled
+Author = big_daddy
+
+[color]
+background=0xE8E8E7
+Button=0xE8E8E7
+mouseover=0x757575
+fontcolor=Black
+
+[settings]
+size=40
+
+
+[icon]
+style=Skilled
+Isize=17
+adjustleft=19
+adjustdown=6

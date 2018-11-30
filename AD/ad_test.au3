@@ -7,7 +7,10 @@ $iResult = _AD_Open("byadmin@by.com", "bill@123admin", "", "byszdcsrv01.by.com")
 ;~ $aObjects = _AD_GetObjectsInOU("", "(&(objectCategory=computer)(objectClass=computer)(description=*)(!description=szdrz*)(!description=Administrator*))", 2, "name,description")
 ;~ _ArrayDisplay($aObjects)
 
-$aObjects = _AD_GetObjectsInOU("", "(&(objectCategory=computer)(objectClass=computer)(description=吴雪玉*))", 2, "name,description")
+;~ $aObjects = _AD_GetObjectsInOU("", "(&(objectCategory=computer)(objectClass=computer)(description=*)(!description=szdrz*))", 2, "name,description")
+;~ _ArrayDisplay($aObjects)
+
+$aObjects = _AD_GetObjectsInOU("", "(&(objectCategory=computer)(objectClass=computer)(description=刘洪*))", 2, "name,description")
 _ArrayDisplay($aObjects)
 
 ;~ $aObjects = _AD_GetObjectsInOU("", "(&(objectCategory=person)(objectClass=user)(!description=*))", 2, "name,description")

@@ -1,0 +1,18 @@
+[Info]
+Title = Rose-wood
+Author = Valuater
+
+[color]
+background= 0xEAD2CD
+Button= 0x8F4A4A
+mouseover=0xD38D89
+fontcolor= 0xFFFFFF 
+
+[settings]
+size=65
+
+[icon]
+style=dred
+Isize=17
+adjustleft=13
+adjustdown=3

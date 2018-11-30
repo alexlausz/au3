@@ -64,10 +64,10 @@ $ButtonDelPrinter03 = GUICtrlCreateButton("删除", 490, 250, 60, 30)
 
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 $Group3 = GUICtrlCreateGroup("常用工具", 32, 332, 553, 200)
-$Button21 = GUICtrlCreateButton("一键添加CBP（新催收系统）桌面图标", 70, 360, 300, 30)
-$Button22 = GUICtrlCreateButton("安装  Chrome 谷歌浏览器", 70, 400, 300, 30)
-$Button23 = GUICtrlCreateButton("安装 Firefox 火狐浏览器", 70, 440, 300, 30)
-$Button24 = GUICtrlCreateButton("安装 eysBeam 众投软电话", 70, 480, 300, 30)
+$Button21 = GUICtrlCreateButton("创建 新催收系统 桌面图标", 70, 360, 300, 30)
+$Button22 = GUICtrlCreateButton("安装 Chrome   谷歌浏览器", 70, 400, 300, 30)
+$Button23 = GUICtrlCreateButton("安装 Firefox  火狐浏览器", 70, 440, 300, 30)
+$Button24 = GUICtrlCreateButton("安装 eysBeam  众投软电话", 70, 480, 300, 30)
 
 ;$Button2 = GUICtrlCreateButton("Button2", 450, 320, 80, 25)
 GUICtrlCreateGroup("", -99, -99, 1, 1)
@@ -246,6 +246,15 @@ While 1
 			FirefoxSetup()
 		 EndIf
 
+   Case $iMsg = $Button24
+		 Local $FirefoxReg = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\eyeBeam 1.5_is1", "UninstallString")
+		 If Not @error Then
+			MsgBox(16, "程序按装", "检测到系统已经安装了EyeBeam 软件。")
+		 Else
+			EyeBeamSetup()
+		 EndIf
+
+
 	EndSelect
  WEnd
 
@@ -264,7 +273,7 @@ Func cbpShortcut()
 			"快速启动佰赢催收业务平台", @SystemDir & "\shell32.dll", "", "130", @SW_SHOWMAXIMIZED)
 	  Local $aDetails = FileGetShortcut($ShortcutPath)
 	  If Not @error Then
-		 MsgBox(64, "CBP快捷方式", "OK！佰赢催收业务平台快捷方式安装完成")
+		 MsgBox(64, "CBP快捷方式", "新催收系统 桌面图标创建完成。")
 	  EndIf
    EndIf
 
@@ -293,59 +302,123 @@ Func ChromeSetup()
 	  If @error Then
 		 Sleep(1000)
 	  Else
-		 Local $hWnd = WinWaitActive("欢迎使用 Chrome - Google Chrome")
+		 Local $hWnd = WinWaitActive("[CLASS:Chrome_WidgetWin_1]", "", 10)
+		 ;Local $hWnd = WinWaitActive("欢迎使用 Chrome - Google Chrome", "", 2)
 		 WinClose($hWnd)
-		 Sleep(250)
-		 MsgBox(8256, "安装谷歌浏览器", "安装成功。")
+		 MsgBox(8256, "程序安装", "谷歌浏览器安装成功。")
 		 ExitLoop
 	  EndIf
    WEnd
 
 EndFunc
 
-;~ FirefoxSetup()
-;~ Func FirefoxSetup()
-;~    Local $SourceSize = $SharePath & "\Firefox Setup 62.0.3.exe"
-;~    Local $DestinationSize = @DesktopDir & "\Firefox Setup 62.0.3.exe"
-;~    If Not FileExists($DestinationSize) Then
-;~ 	  ;_FileCopy("\\10.80.7.252\File_share\IT部\4.工具软件\ChromeStandaloneSetup64.exe", @DesktopDir)
-;~ 	  CopyWithProg($SourceSize, $DestinationSize)
-;~    EndIf
-;~    While 1
-;~ 	  If Not FileExists($DestinationSize) Then
-;~ 		 Sleep(500)
-;~ 	  Else
-;~ 		 ExitLoop
-;~ 	  EndIf
-;~    WEnd
-;~    Sleep(500)
-;~    Run($DestinationSize)
-;~    Sleep(3000)
-;~    While 1
-;~ 	  Local $FirefoxReg = RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\App Paths\firefox.exe", "")
-;~ 	  If @error Then
-;~ 		 Sleep(1000)
-;~ 	  Else
-;~ 		 Local $hWnd = WinWaitActive("Mozilla Firefox 安装")
-;~ 		 Sleep(250)
-;~ 		 Send("!n")
-;~ 		 Sleep(250)
-;~ 		 Send("!n")
-;~ 		 Sleep(250)
-;~ 		 ControlClick("Mozilla Firefox 安装", "", "[CLASS:Button; INSTANCE:4; ID:1203]")
-;~ 		 Sleep(250)
-;~ 		 Send("!i")
-;~ 		 Sleep(250)
-;~ 		 Send("{SPACE}")
-;~ 		 Sleep(250)
-;~ 		 Send("!f")
-;~ 		 Sleep(250)
-;~ 		 MsgBox(8256, "安装火狐浏览器", "安装成功。")
-;~ 		 ExitLoop
-;~ 	  EndIf
-;~    WEnd
+FirefoxSetup()
+Func FirefoxSetup()
 
-;~ EndFunc
+   Local $SourceSize = $SharePath & "\Firefox Setup 62.0.3.exe"
+   Local $DestinationSize = @DesktopDir & "\Firefox Setup 62.0.3.exe"
+   If Not FileExists($DestinationSize) Then
+	  ;_FileCopy("\\10.80.7.252\File_share\IT部\4.工具软件\ChromeStandaloneSetup64.exe", @DesktopDir)
+	  CopyWithProg($SourceSize, $DestinationSize)
+   EndIf
+   While 1
+	  If Not FileExists($DestinationSize) Then
+		 Sleep(500)
+	  Else
+		 ExitLoop
+	  EndIf
+   WEnd
+   Sleep(500)
+   $Pid = Run($DestinationSize)
+   WinWait("Mozilla Firefox 安装")
+   Local $hWnd = WinGetHandle("Mozilla Firefox 安装")
+   If Not @error Then
+	  WinActivate($hWnd)
+	  Send("!n")
+	  Sleep(250)
+	  Send("!n")
+	  Sleep(250)
+	  ControlClick($hWnd, "", "Button4")
+	  Sleep(250)
+	  Send("!i")
+	  Sleep(250)
+	  Send("!l")
+   EndIf
+   Local $hWnd = WinWait("Mozilla Firefox 安装 ", "Mozilla Firefox 已经安装至您的计算机。")
+   WinActivate($hWnd)
+   Sleep(250)
+   Send("!f")
+   Sleep(1000)
+   If Not ProcessExists($Pid) Then
+	  MsgBox(8256, "程序安装", "火狐浏览器安装成功。")
+   EndIf
+
+EndFunc
+
+EyeBeamSetup()
+Func EyeBeamSetup()
+   Local $EyeBeamSN = "FU9E8UQKSFUNY73B2TH4CZB9SACZE84LDBXKXBQQ-Q3FH285YB2U6X7J3MW88559J"
+   Local $SourceSize = $SharePath & "\eyeBeam1.5.exe"
+   Local $DestinationSize = @DesktopDir & "\eyeBeam1.5.exe"
+   If Not FileExists($DestinationSize) Then
+	  ;_FileCopy("\\10.80.7.252\File_share\IT部\4.工具软件\ChromeStandaloneSetup64.exe", @DesktopDir)
+	  CopyWithProg($SourceSize, $DestinationSize)
+   EndIf
+   While 1
+	  If Not FileExists($DestinationSize) Then
+		 Sleep(500)
+	  Else
+		 ExitLoop
+	  EndIf
+   WEnd
+   Sleep(500)
+   Run($DestinationSize)
+   Local $hWnd = WinWaitActive("安装程序 - eyeBeam", "", 5)
+   If Not @error Then
+	  WinActivate($hWnd)
+	  Send("!n")
+	  Sleep(250)
+	  ControlClick($hWnd, "", "TRadioButton1")
+	  Sleep(250)
+	  Send("!n")
+	  Sleep(250)
+	  Send("!n")
+	  Sleep(250)
+	  Send("!n")
+	  Local $hWnd = WinWaitActive("安装程序 - eyeBeam", "完成 eyeBeam 安装向导", 3)
+	  Sleep(250)
+	  Send("!f")
+	  Local $hWnd = WinWaitActive("错误", "", 3)
+	  If $hWnd == 0 Then
+		 Local $Pid = ProcessExists("eyeBeam.exe")
+		 If $Pid <> 0 Then
+			ProcessClose("eyeBeam.exe")
+			MsgBox(8256, "程序安装", "EyeBeam 众投软电话安装成功。")
+		 EndIf
+	  Else
+		 Send("{ENTER}")
+		 Sleep(250)
+		 Local $hWnd = WinWaitActive("输入软件许可", "", 3)
+		 If $hWnd == 0 Then
+			MsgBox(8256, "程序安装", "EyeBeam 众投软电话安装成功。")
+		 Else
+			ControlSend($hWnd, "", "[CLASS:Edit; INSTANCE:1]", $EyeBeamSN)
+			Sleep(250)
+			Send("{ENTER}")
+			Sleep(250)
+		 EndIf
+	  EndIf
+
+	  Local $Pid = ProcessExists("eyeBeam.exe")
+	  If $Pid <> 0 Then
+		 ProcessClose("eyeBeam.exe")
+	  EndIf
+   Else
+	  MsgBox(48, "Installation", "Installation failed.")
+   EndIf
+
+
+EndFunc
 
 
 Func CopyWithProg($SourceSize, $DestinationSize)

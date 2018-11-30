@@ -1,0 +1,19 @@
+[Info]
+Title = Black-Yellow
+Author = Valuater
+
+[color]
+background=0xFBDE03
+Button=0x979898
+mouseover= 0xABA9A9
+fontcolor= 
+
+
+[settings]
+size=50
+
+[icon]
+style=yellowpnt
+Isize=17
+adjustleft=30
+adjustdown=5
